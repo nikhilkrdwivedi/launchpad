@@ -1,0 +1,19 @@
+{
+  "name": "launchpad",
+  "version": "1.0.0",
+  "description": "This is server for launchpad app.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikhilkrdwivedi/launchpad.git"
+  },
+  "author": "@nikhilkrdwivedi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nikhilkrdwivedi/launchpad/issues"
+  },
+  "homepage": "https://github.com/nikhilkrdwivedi/launchpad#readme"
+}

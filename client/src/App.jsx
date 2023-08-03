@@ -1,34 +1,24 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-
+import { useTheme } from '@contexts/ThemeContext'
+import TopHeader from '@components/headers/TopHeader'
+const light = ['bg-red-900', 'bg-green-900', 'bg-yellow-900', 'bg-pink-900']
+const dark = ['dark:bg-red-900', 'dark:bg-green-900', 'dark:bg-yellow-900', 'dark:bg-pink-900'].reverse()
 function App() {
   const [count, setCount] = useState(0)
-
+  const { isDarkMode, toggleTheme } = useTheme();
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className='bg-white dark:bg-gray-800'>
+    <TopHeader />
+    
+    {[2,1,1,1].map((item, index)=>(
+      <div key={index} className={`h-96 flex items-center`}>
+      {/* <div key={index} className={`h-96 flex items-center ${dark[index]} ${light[index]} dark:text-white`}> */}
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est ad magnam iste a minus, recusandae in repellendus, neque ex culpa doloremque, excepturi illo natus pariatur aspernatur. Dolores nemo pariatur nobis.</p>
+        
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    ))}
+    </div>
   )
 }
 

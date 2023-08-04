@@ -19,11 +19,12 @@ export default function TopHeader() {
           className="px-4 py-2 rounded bg-green-500 dark:bg-pink-500"
         >
           {isDarkMode ? 
+          // '🌞'
           <FiMoon color='white' size={24} fill='white' />
           
           : 
           <FiSun color='yellow' size={24} fill='yellow' />
-          
+          // '🌚'
           }
         </button>
         </div>

@@ -4,6 +4,7 @@ import { useTheme } from '@contexts/ThemeContext'
 import TopHeader from '@components/headers/TopHeader'
 import HomePageBanner from '@components/banners/HomePageBanner'
 import Footers from './components/headers/Footers'
+import Tab from './components/Tabs/ActionTab'
 const light = ['bg-red-900', 'bg-green-900', 'bg-yellow-900', 'bg-pink-900']
 const dark = ['dark:bg-red-900', 'dark:bg-green-900', 'dark:bg-yellow-900', 'dark:bg-pink-900'].reverse()
 function App() {
@@ -12,6 +13,7 @@ function App() {
   return (
     <div className='bg-white dark:bg-gray-800'>
     <TopHeader />
+    <Tab />
     <HomePageBanner />
     <Footers />
     {/* {[2,1,1,1].map((item, index)=>(

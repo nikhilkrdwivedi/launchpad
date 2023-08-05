@@ -8,7 +8,7 @@ import RequiredAuthentication from "./RequiredAuthentication";
 import { useState } from "react";
 import { useEffect } from "react";
 import GetStarted from "@pages/PublicPages/GetStarted";
-import PublicHomePage from "@pages/publicPages/Home";
+import PublicHomePage from "@pages/privatePages/Home";
 // const PublicHome = () => {
 //   return (
 //     <Route>

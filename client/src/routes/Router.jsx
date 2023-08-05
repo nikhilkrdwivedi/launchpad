@@ -7,8 +7,8 @@ import PrivateHomePage from "@pages/privatePages/Home";
 import RequiredAuthentication from "./RequiredAuthentication";
 import { useState } from "react";
 import { useEffect } from "react";
-import GetStarted from "@pages/privatePages/GetStarted";
-import PublicHomePage from "@pages/privatePages/Home";
+import GetStarted from "@pages/publicPages/GetStarted";
+import PublicHomePage from "@pages/publicPages/Home";
 
 // const PublicHome = () => {
 //   return (

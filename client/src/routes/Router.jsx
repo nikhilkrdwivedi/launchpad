@@ -60,7 +60,7 @@ export default function Router() {
         </Route>
       ) : (
         <Route>
-          {/* <Route element={<PublicHomePage />} path="/get-started" exact /> */}
+          <Route element={<PublicHomePage />} path="/" />
           <Route element={<PublicHomePage />} path="/home" />
           <Route element={<GetStarted />} path="/get-started" />
           <Route element={<GetStarted />} path="/login" />

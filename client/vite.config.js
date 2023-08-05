@@ -11,7 +11,8 @@ export default defineConfig({
       '@assets': path.resolve(__dirname, './src/assets'),
       '@components': path.resolve(__dirname, './src/components'),
       '@contexts': path.resolve(__dirname, './src/contexts'),
-      '@pages': path.resolve(__dirname, './src/pages')
+      '@pages': path.resolve(__dirname, './src/pages'),
+      '@elements': path.resolve(__dirname, './src/elements'),
       // '@assets': '/src/assets',
       // '@components': '/src/components',
       // '@contexts': '/src/contexts',

@@ -3,8 +3,8 @@
 // import GetStarted from "@pages/publicPages/GetStarted.jsx";
 import PageNotFound from "@pages/commonPages/PageNotFound";
 import { Route, Routes } from "react-router-dom";
-import PublicHomePage from "@pages/publicPages/Home";
-import PrivateHomePage from "@pages/privatePages/Home";
+import PublicHomePage from "../pages/publicPages/Home";
+import PrivateHomePage from "../pages/privatePages/Home";
 import RequiredAuthentication from "./RequiredAuthentication";
 import { useState } from "react";
 import { useEffect } from "react";

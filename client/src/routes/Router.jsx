@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 // import React from 'react'
-import GetStarted from "@pages/publicPages/GetStarted";
+import GetStarted from "@pages/publicPages/GetStarted.jsx";
 import PageNotFound from "@pages/commonPages/PageNotFound";
 import { Route, Routes } from "react-router-dom";
 import PublicHomePage from "@pages/publicPages/Home";
@@ -59,7 +59,7 @@ export default function Router() {
         </Route>
       ) : (
         <Route>
-          <Route element={<PublicHomePage />} path="/" exact />
+          <Route element={<PublicHomePage />} path="/get-started" exact />
           <Route element={<PublicHomePage />} path="/home" />
           <Route element={<GetStarted />} path="/get-started" />
           <Route element={<GetStarted />} path="/login" />

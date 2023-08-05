@@ -9,5 +9,10 @@
       // Add more aliases here if needed
     }
   },
-  "include": ["src/**/*.js", "src/**/*.jsx"]
+  "include": [
+    "src/**/*.js",
+    "src/**/*.jsx",
+    "src/**/**/*.js",
+    "src/**/**/*.jsx"
+  ]
 }

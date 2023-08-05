@@ -9,25 +9,25 @@ import RequiredAuthentication from "./RequiredAuthentication";
 import { useState } from "react";
 import { useEffect } from "react";
 import GetStarted from "../pages/PublicPages/GetStarted";
-const PublicHome = () => {
-  return (
-    <Route>
-      <Route element={<PublicHomePage />} path="/" exact />
-      <Route element={<PublicHomePage />} path="/home" />
-      <Route element={<GetStarted />} path="/get-started" />
-      <Route path="*" element={<PageNotFound />} />
-    </Route>
-  );
-};
+// const PublicHome = () => {
+//   return (
+//     <Route>
+//       <Route element={<PublicHomePage />} path="/" exact />
+//       <Route element={<PublicHomePage />} path="/home" />
+//       <Route element={<GetStarted />} path="/get-started" />
+//       <Route path="*" element={<PageNotFound />} />
+//     </Route>
+//   );
+// };
 
-const PrivateHome = () => {
-  return (
-    <Route element={<RequiredAuthentication />}>
-      <Route element={<PrivateHomePage />} path="/" />
-      <Route element={<PrivateHomePage />} path="/dashboard" />
-    </Route>
-  );
-};
+// const PrivateHome = () => {
+//   return (
+//     <Route element={<RequiredAuthentication />}>
+//       <Route element={<PrivateHomePage />} path="/" />
+//       <Route element={<PrivateHomePage />} path="/dashboard" />
+//     </Route>
+//   );
+// };
 
 export default function Router() {
   const token = localStorage.getItem("token");
@@ -60,7 +60,7 @@ export default function Router() {
         </Route>
       ) : (
         <Route>
-          <Route element={<PublicHomePage />} path="/get-started" exact />
+          {/* <Route element={<PublicHomePage />} path="/get-started" exact /> */}
           <Route element={<PublicHomePage />} path="/home" />
           <Route element={<GetStarted />} path="/get-started" />
           <Route element={<GetStarted />} path="/login" />

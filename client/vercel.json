@@ -4,5 +4,19 @@
             "source": "/(.*)",
             "destination": "/"
         }
+    ],
+    "routes": [
+        {
+            "src": "/",
+            "dest": "/"
+        },
+        {
+            "src": "/login",
+            "dest": "/"
+        },
+        {
+            "src": "/get-started",
+            "dest": "/"
+        }
     ]
 }

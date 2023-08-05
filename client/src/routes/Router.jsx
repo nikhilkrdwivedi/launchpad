@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 // import React from 'react'
-import GetStarted from "@pages/publicPages/GetStarted.jsx";
+// import GetStarted from "@pages/publicPages/GetStarted.jsx";
 import PageNotFound from "@pages/commonPages/PageNotFound";
 import { Route, Routes } from "react-router-dom";
 import PublicHomePage from "@pages/publicPages/Home";
@@ -8,6 +8,7 @@ import PrivateHomePage from "@pages/privatePages/Home";
 import RequiredAuthentication from "./RequiredAuthentication";
 import { useState } from "react";
 import { useEffect } from "react";
+import GetStarted from "../pages/PublicPages/GetStarted";
 const PublicHome = () => {
   return (
     <Route>

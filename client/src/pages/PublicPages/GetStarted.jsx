@@ -4,9 +4,9 @@ import Container from "@components/containers/Container";
 import TopHeader from "@components/headers/TopHeader";
 // import Input from "@elements/Input";
 // import Button from "@elements/Button";
-import SignIn from "@components/Authentication/SignIn";
+import SignIn from "@components/authentication/SignIn";
 import { useState } from "react";
-import SignUp from "@components/Authentication/SignUp";
+import SignUp from "@components/authentication/SignUp";
 export default function GetStarted() {
   const [renderSignInForm, setRenderSignInForm] = useState(true);
   return (

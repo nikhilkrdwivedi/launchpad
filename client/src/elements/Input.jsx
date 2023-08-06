@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { TbClipboardCopy } from "react-icons/tb";
 // import ErrorText from "./ErrorText";
 
 function Input({
@@ -49,7 +50,7 @@ function Input({
             rounded
             m-0
         focus:text-gray-700 focus:bg-white focus:border-gray-400 ${classNames} ${
-            type === "password" ? " pr-10 " : ""
+            type === "password" || type === "clipboard" ? " pr-10 " : ""
           }`}
         />
         {type === "password" && (
@@ -64,6 +65,18 @@ function Input({
             ) : (
               <AiFillEye size={18} />
             )}
+          </span>
+        )}
+
+        {type === "clipboard" && (
+          <span
+            title="Click to copy"
+            className="cursor-pointer hover:text-green-600 h-full leading-snug font-normal text-center text-slate-300 absolute bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-6"
+            onClick={async () => {
+              await navigator.clipboard.writeText(value);
+            }}
+          >
+            <TbClipboardCopy size={18} />
           </span>
         )}
       </label>

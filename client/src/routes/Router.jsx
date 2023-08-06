@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import GetStarted from "@pages/publicPages/GetStarted";
 import PublicHomePage from "@pages/publicPages/Home";
+import Dashboard from "@pages/privatePages/Dashboard";
 
 // const PublicHome = () => {
 //   return (
@@ -61,10 +62,10 @@ export default function Router() {
         </Route>
       ) : (
         <Route>
+          <Route element={<Dashboard />} path="/" />
           <Route element={<PublicHomePage />} path="/" />
           <Route element={<PublicHomePage />} path="/home" />
           <Route element={<GetStarted />} path="/get-started" />
-          <Route element={<GetStarted />} path="/login" />
           {/* <Route path="*" element={<PageNotFound />} /> */}
         </Route>
       )}

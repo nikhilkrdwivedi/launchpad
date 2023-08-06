@@ -8,7 +8,7 @@ export default function TopHeader() {
   const { isDarkMode, toggleTheme } = useTheme();
 
   return (
-    <div className="flex justify-between items-center h-16 px-4 md:px-24 py-4 md:py-4 backdrop-filter bg-transparent backdrop-blur-lg bg-opacity-70 sticky -top-0.5 bottom-0.5 border-b border-gray-200 dark:border-gray-600">
+    <div className="z-10 flex justify-between items-center h-16 px-4 md:px-24 py-4 md:py-4 backdrop-filter bg-transparent backdrop-blur-lg bg-opacity-70 sticky -top-0.5 bottom-0.5 border-b border-gray-200 dark:border-gray-600">
       <div>
         {/* Remove spin class */}
         <img

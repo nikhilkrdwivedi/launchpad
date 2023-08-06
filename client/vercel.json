@@ -11,6 +11,10 @@
         {
             "src": "/get-started",
             "dest": "/"
+        },
+        {
+            "src": "*",
+            "dest": "*"
         }
     ]
 }

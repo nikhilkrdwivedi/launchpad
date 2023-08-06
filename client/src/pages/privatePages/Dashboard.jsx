@@ -4,15 +4,20 @@ import TopHeaderWrapper from "@components/headers/TopHeaderWrapper";
 import Link from "@elements/Link";
 import { useEffect } from "react";
 import { useState } from "react";
-import { FiExternalLink } from "react-icons/fi";
+import { FiExternalLink, FiEdit } from "react-icons/fi";
 import { FaTwitterSquare, FaFacebookSquare } from "react-icons/fa";
-import { ImLinkedin } from "react-icons/im";
+import { BiEdit } from "react-icons/bi";
 import LinkedInShareButton from "@components/share/LinkedInShareButton";
 import TwitterShareButton from "@components/share/TwitterShareButton";
 import FaceBookShareButton from "@components/share/FaceBookShareButton";
 import Input from "@elements/Input";
+import Button from "@elements/Button";
+import Modal from "@elements/Modal";
+import EditLinkModal from "@components/manage-links/EditLinkModal";
 
 export default function Dashboard() {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({});
   const postTitle = "Check out my awesome post!";
   const postSummary = "A brief summary of the post";
   const postSource = "Your Website Name";
@@ -30,6 +35,14 @@ export default function Dashboard() {
   useEffect(() => {
     fetchDate();
   }, []);
+  const openEditLinkModal = (item) => {
+    setSelectedItem(item);
+    setShowModal(true);
+  };
+  const closeEditLinkModal = () => {
+    setSelectedItem({});
+    setShowModal(false);
+  };
   return (
     <TopHeaderWrapper>
       <Container className="flex-1 dark:bg-gray-900">
@@ -41,13 +54,19 @@ export default function Dashboard() {
             >
               <div className="flex flex-col justify-between h-42 gap-4 overflow-auto">
                 <div className="flex justify-between items-center">
-                  <div>
+                  <div className="flex justify-center items-center gap-2">
                     <Link
                       Icon={FiExternalLink}
                       target="blank"
                       href="https://google.com"
-                      IconSize={24}
-                      btnClass="gap-1 !justify-start text-gray-600 dark:text-gray-300 text-sm"
+                      IconSize={30}
+                      btnClass="text-gray-600 dark:text-gray-300 text-sm"
+                    />
+                    <Button
+                      Icon={FiEdit}
+                      onClick={() => openEditLinkModal(item)}
+                      IconSize={26}
+                      btnClass="!p-0 !m-0 !w-auto text-green-600"
                     />
                   </div>
                   <div className="flex justify-between items-center gap-2">
@@ -93,6 +112,13 @@ export default function Dashboard() {
             </div>
           ))}
         </div>
+        <EditLinkModal
+          openModal={() => setShowModal(true)}
+          closeModal={() => closeEditLinkModal()}
+          data={selectedItem}
+          title={"Edit Quick Link"}
+          isOpen={showModal}
+        />
       </Container>
     </TopHeaderWrapper>
   );

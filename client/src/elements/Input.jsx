@@ -14,7 +14,7 @@ function Input({
   classNames,
   isHide,
   readOnly,
-  error,
+  // error,
 }) {
   const [showPassword, setShowPassword] = useState(true);
   return (
@@ -86,10 +86,10 @@ function Input({
 }
 
 Input.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
   classNames: PropTypes.string,
@@ -104,5 +104,6 @@ Input.defaultProps = {
   isHide: false,
   readOnly: false,
   error: "",
+  onChange: null,
 };
 export default Input;

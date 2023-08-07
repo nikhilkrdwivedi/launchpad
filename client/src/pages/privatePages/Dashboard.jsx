@@ -13,7 +13,7 @@ import FaceBookShareButton from "@components/share/FaceBookShareButton";
 import Input from "@elements/Input";
 import Button from "@elements/Button";
 import Modal from "@elements/Modal";
-import EditLinkModal from "@components/manage-links/EditLinkModal";
+import EditLinkModal from "@components/manage-links/ManageLinkModal";
 
 export default function Dashboard() {
   const [showModal, setShowModal] = useState(false);

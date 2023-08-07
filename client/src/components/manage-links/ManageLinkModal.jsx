@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import Modal from "@elements/Modal";
+import ManageLinkModalBody from "./ManageLinkModalBody";
 // import MyModal from "@elements/Modal";
 // import React from "react";
 
-export default function EditLinkModal({
+export default function ManageLinkModal({
   isOpen = true,
   closeModal,
   openModal,
@@ -18,7 +19,7 @@ export default function EditLinkModal({
         closeModal={closeModal}
         isOpen={isOpen}
         title={title}
-        body={body}
+        body={<ManageLinkModalBody />}
         footer={footer}
       />
     </div>

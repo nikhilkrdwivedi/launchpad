@@ -8,6 +8,7 @@ export default function Modal({
   isOpen,
   title,
   modalSizeCss = "w-3/4 md:w-2/3 lg:w-1/2",
+  body,
 }) {
   //   let [isOpen, setIsOpen] = useState(true);
 
@@ -75,12 +76,7 @@ export default function Modal({
                       onClick={closeModal}
                     />
                   </Dialog.Title>
-                  <div className="mt-2 p-4">
-                    <p className="text-sm text-gray-500">
-                      Your payment has been successfully submitted. We’ve sent
-                      you an email with all of the details of your order.
-                    </p>
-                  </div>
+                  <div className="mt-2 p-4">{body}</div>
 
                   <div className="mt-4 p-4">
                     <button

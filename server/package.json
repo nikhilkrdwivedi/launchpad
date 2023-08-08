@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/nikhilkrdwivedi/launchpad/issues"
   },
-  "homepage": "https://github.com/nikhilkrdwivedi/launchpad#readme"
+  "homepage": "https://github.com/nikhilkrdwivedi/launchpad#readme",
+  "devDependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.4.2"
+  }
 }

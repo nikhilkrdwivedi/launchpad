@@ -11,7 +11,7 @@ export default function Button({
   return (
     <button
       onClick={onClick}
-      className={` text-white font-medium rounded-md  text-center flex items-center justify-evenly ${btnClass}`}
+      className={`rounded-md  text-center flex items-center justify-evenly ${btnClass}`}
     >
       {Icon && <Icon size={IconSize} />}
       {title}

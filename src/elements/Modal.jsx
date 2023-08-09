@@ -9,6 +9,7 @@ export default function Modal({
   title,
   modalSizeCss = "w-3/4 md:w-2/3 lg:w-1/2",
   body,
+  footer
 }) {
   //   let [isOpen, setIsOpen] = useState(true);
 
@@ -79,13 +80,14 @@ export default function Modal({
                   <div className="mt-2 p-4">{body}</div>
 
                   <div className="mt-4 p-4">
-                    <button
+                    {footer}
+                    {/* <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={closeModal}
                     >
                       Got it, thanks!
-                    </button>
+                    </button> */}
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

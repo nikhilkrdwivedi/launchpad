@@ -10,7 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.0",
+    "@grafbase/apollo-link": "^1.1.0",
     "@headlessui/react": "^1.7.16",
+    "graphql": "^16.7.1",
     "query-string": "^8.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

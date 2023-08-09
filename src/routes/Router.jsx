@@ -45,8 +45,8 @@ export default function Router() {
   //     // return <Navigate to="/" state={{ from: location }} replace />;
   //   }
   const validateToken = async () => {
-    const data = await fetch("https://jsonplaceholder.typicode.com/posts");
-    console.log({ data: await data.json() });
+    // const data = await fetch("https://jsonplaceholder.typicode.com/posts");
+    // console.log({ data: await data.json() });
   };
   useEffect(() => {
     validateToken();

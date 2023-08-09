@@ -16,7 +16,7 @@ import Modal from "@elements/Modal";
 import EditLinkModal from "@components/manage-links/ManageLinkModal";
 import ManageLinkHeader from "@components/manage-links/ManageLinkHeader";
 import { useQuery, gql, useMutation } from '@apollo/client'
-import { QUICKLINKS_QUERY, QUICKLINK__MUTATION } from "../../data/graphql/queries/quickLinks";
+import { CREATE_QUICKLINK__MUTATION, QUICKLINKS_QUERY, UPDATE_QUICKLINK__MUTATION,  } from "../../data/graphql/queries/quickLinks";
 import ManageLinkCard from "@components/manage-links/ManageLinkCard";
 import NoDataFound from "@components/manage-links/NoDataFound";
 import ManageLinkList from "@components/manage-links/ManageLinkList";
@@ -43,9 +43,12 @@ export default function Dashboard() {
   // {userCollection: { edges: { node } }}
   // :{quickLinkCollection:{edges:quickLinksList}}
   const { isDarkMode, toggleTheme } = useTheme();
-  let { data, loading:quickLinksQueryLoading, error } = useQuery(QUICKLINKS_QUERY)
+  let { data, loading:quickLinksQueryLoading, error } = useQuery(QUICKLINKS_QUERY,{
+    variables: { first:2 },
+  })
   console.log({data , quickLinksQueryLoading, error})
-  const [createList] = useMutation(QUICKLINK__MUTATION)
+  const [createList] = useMutation(CREATE_QUICKLINK__MUTATION);
+  const [updateList] = useMutation(UPDATE_QUICKLINK__MUTATION);
   const [showModal, setShowModal] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
@@ -59,11 +62,11 @@ export default function Dashboard() {
       setQuickLinksList(list);
       setPageInfo(pageInfo);
     }
-  }, [quickLinksQueryLoading]);
+  }, [quickLinksQueryLoading,data]);
 
   
 
-  const [_data, setData] = useState([]);
+  // const [_data, setData] = useState([]);
   // const fetchDate = async () => {
   //   let data = await fetch("https://jsonplaceholder.typicode.com/posts");
   //   // console.log({ data: await data.json() });
@@ -75,43 +78,47 @@ export default function Dashboard() {
   }, []);
   const saveLink = async () => {
     try {
-        console.log({selectedItem})
-        const res = await createList({
+      console.log({selectedItem})
+      const call = selectedItem.id ? updateList : createList;
+        const res = await call({
           variables: selectedItem,
+          refetchQueries: [QUICKLINKS_QUERY]
         })
-        console.log('🚀 ~ file: Home.tsx:97 ~ onDidDismiss: ~ res', res)
+        // updateList
+        setShowModal(false)
+        toast('Great news! Your changes have been saved. 😃', {
+          type:'success',
+          theme : isDarkMode ? 'dark' : 'light'
+        })
     } catch (error) {
       console.log({error})
       const errorMsg = error.message
-      // showToastSuccess(errorMsg, 'error')
       toast(errorMsg, {
         type:'error',
         theme : isDarkMode ? 'dark' : 'light'
       })
     }
   }
-  const openEditLinkModal = (item) => {
+  const openManageLinkModal = (item) => {
     setSelectedItem(item);
     console.log({item})
     setShowModal(true);
   };
-  const closeEditLinkModal = () => {
+  const closeManageLinkModal = () => {
     setShowModal(false);
     setSelectedItem({});
   };
-  const notify = () => toast("Wow so easy!");
   return (
     <TopHeaderWrapper>
-       {/* <button onClick={notify}>Notify!</button> */}
-      <Container className="flex-1 dark:bg-gray-900">
-        <ManageLinkHeader onClick={() => openEditLinkModal({quickNote:new Date(), link: Date.now()})}>
+      <Container className="flex-1 dark:bg-gray-900 px-4 md:px-20 md:py-4">
+        <ManageLinkHeader onClick={() => openManageLinkModal({quickNote:'', link: ''})}>
         <FullScreenLoader  show={quickLinksQueryLoading} showCloseIcon={false}/>
-        <ManageLinkList loading={quickLinksQueryLoading} data={quickLinksList}  />
+        <ManageLinkList loading={quickLinksQueryLoading} data={quickLinksList} onClick={(item) => openManageLinkModal(item)}  />
         <NoDataFound loading={quickLinksQueryLoading} data={quickLinksList}  />
         {console.log({selectedItem})}
         <EditLinkModal
           openModal={() => setShowModal(true)}
-          closeModal={() => closeEditLinkModal()}
+          closeModal={() => closeManageLinkModal()}
           data={selectedItem}
           title={"Edit Quick Link"}
           isOpen={showModal}

@@ -58,7 +58,6 @@ function TextArea({
 
 TextArea.propTypes = {
   label: PropTypes.string,
-  type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,

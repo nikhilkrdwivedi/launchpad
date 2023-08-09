@@ -1,8 +1,8 @@
 import { useQuery, gql, useMutation } from '@apollo/client'
 
 export const QUICKLINKS_QUERY = gql`
-  query @live {
-    quickLinkCollection(first: 10) {
+  query QuickLinkCollection($first: Int) { #$after:String, after:$after
+    quickLinkCollection(first: $first , orderBy:{createdAt:DESC}) {
     edges {
       node {
         link
@@ -13,8 +13,10 @@ export const QUICKLINKS_QUERY = gql`
       }
     }
     pageInfo {
-      hasPreviousPage
+        hasPreviousPage
       hasNextPage
+      startCursor
+      endCursor
     }
   }
   }
@@ -31,6 +33,8 @@ export const USERS_QUERY = gql`
     }
   }
 `
+
+
 
 // mutation QuickLinkDelete {
 //     quickLinkDelete(by: {id:"quicklink_01H7CQAM47H68PMAAB0336ZJ19"}) {
@@ -65,7 +69,7 @@ export const USERS_QUERY = gql`
 //   }
 
 
-export const QUICKLINK__MUTATION = gql`
+export const CREATE_QUICKLINK__MUTATION = gql`
   mutation QuickLinkCreate($link: String!, $quickNote: String!) {
     quickLinkCreate(input: { link: $link, quickNote: $quickNote }) {
         quickLink {
@@ -75,3 +79,16 @@ export const QUICKLINK__MUTATION = gql`
     }
   }
 `
+export const UPDATE_QUICKLINK__MUTATION = gql`
+mutation QuickLinkUpdate ($id: ID, $link:String, $quickNote: String ){
+  quickLinkUpdate(by: {id:$id}, input:{link:$link, quickNote: $quickNote}) {
+    quickLink {
+      link
+      quickNote
+      id
+      updatedAt
+      createdAt
+    }
+  }
+}
+`;

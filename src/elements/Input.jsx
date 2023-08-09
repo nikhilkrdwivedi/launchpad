@@ -87,7 +87,7 @@ function Input({
 
 Input.propTypes = {
   label: PropTypes.string,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
@@ -105,5 +105,6 @@ Input.defaultProps = {
   readOnly: false,
   error: "",
   onChange: null,
+  type:"text"
 };
 export default Input;

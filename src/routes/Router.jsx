@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import GetStarted from "@pages/publicPages/GetStarted";
 import PublicHomePage from "@pages/publicPages/Home";
 import Dashboard from "@pages/privatePages/Dashboard";
+import TopHeaderWrapper from "@components/headers/TopHeaderWrapper";
 
 // const PublicHome = () => {
 //   return (
@@ -62,11 +63,13 @@ export default function Router() {
         </Route>
       ) : (
         <Route>
+          {/* <TopHeaderWrapper > */}
           <Route element={<Dashboard />} path="/" />
           {/* <Route element={<PublicHomePage />} path="/" /> */}
           <Route element={<PublicHomePage />} path="/home" />
           <Route element={<GetStarted />} path="/get-started" />
           {/* <Route path="*" element={<PageNotFound />} /> */}
+          {/* </TopHeaderWrapper> */}
         </Route>
       )}
       <Route path="*" element={<PageNotFound />} />

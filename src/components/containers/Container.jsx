@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 export default function Container({ children, className }) {
   return (
-    <div className={"w-full p-1 sm:px-2 md:px-4 " + className}>{children}</div>
+    <div className={"w-full " + className}>{children}</div>
   );
 }
 

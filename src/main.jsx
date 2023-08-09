@@ -15,24 +15,26 @@ import { isLiveQuery, SSELink } from '@grafbase/apollo-link'
 import { getOperationAST } from 'graphql'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { SignJWT } from 'jose'
+import { SignJWT } from 'jose'
 
 // Example of genreating a JWT:
-// const secret = new Uint8Array(
-//   'mysupersecretk3y!'.split('').map((c) => c.charCodeAt(0)),
-// )
+const secret = new Uint8Array(
+  'mysupersecretk3y!'.split('').map((c) => c.charCodeAt(0)),
+)
 
-// const getToken = () => {
-//   return new SignJWT({ sub: 'user_1234', groups: [] })
-//     .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
-//     .setIssuer('https://devdactic.com')
-//     .setIssuedAt()
-//     .setExpirationTime('2h')
-//     .sign(secret)
-// }
-
-const GRAFBASE_API_URL = 'http://127.0.0.1:4000/graphql'
-// const GRAFBASE_API_URL = 'https://launchpad-master-nikhilkrdwivedi.grafbase.app/graphql'
+const getToken = () => {
+  return new SignJWT({ sub: 'user_1234', groups: [] })
+    .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
+    .setIssuer('https://devdactic.com')
+    .setIssuedAt()
+    .setExpirationTime('2h')
+    .sign(secret)
+}
+getToken().then(tokenn=>{
+  console.log({tokenn})
+})
+// const GRAFBASE_API_URL = 'http://127.0.0.1:4000/graphql'
+const GRAFBASE_API_URL = 'https://launchpad-master-nikhilkrdwivedi.grafbase.app/graphql'
 // 'https://grafbase-app-ionic-main-saimon24.grafbase.app/graphql'
 
 // Use JWT in a real app or API Key for testing with x-api-key

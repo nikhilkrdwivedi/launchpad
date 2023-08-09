@@ -1,10 +1,26 @@
+import Button from '@elements/Button'
+import Link from '@elements/Link'
 import React from 'react'
-
-export default function ManageLinkCard({ item }) {
+import { FiExternalLink, FiEdit } from "react-icons/fi";
+import { FaTwitterSquare, FaFacebookSquare } from "react-icons/fa";
+import { BiEdit } from "react-icons/bi";
+import LinkedInShareButton from "@components/share/LinkedInShareButton";
+import TwitterShareButton from "@components/share/TwitterShareButton";
+import FaceBookShareButton from "@components/share/FaceBookShareButton";
+import Input from "@elements/Input";
+// import Button from "@elements/Button";
+import Modal from "@elements/Modal";
+const postTitle = "Check out my awesome post!";
+const postSummary = "A brief summary of the post";
+const postSource = "Your Website Name";
+const postUrl =
+  "https://www.youtube.com/watch?v=h2ZS5rTsuRQ&ab_channel=RichardOliverBray";
+const tweetText = "Check out my awesome tweet!";
+const tweetUrl = "https://your-tweet-url.com";
+export default function ManageLinkCard({ data }) {
     return (
         <div
         className="col-span-1 py-4 px-4 md:p-4  rounded-md shadow-md dark:shadow-gray-600 shadow-gray-300 dark:bg-gray-800 bg-gray-100"
-        key={index}
     >
         <div className="flex flex-col justify-between h-42 gap-4 overflow-auto">
             <div className="flex justify-between items-center">
@@ -18,7 +34,7 @@ export default function ManageLinkCard({ item }) {
                     />
                     <Button
                         Icon={FiEdit}
-                        onClick={() => openEditLinkModal(item)}
+                        onClick={() => openEditLinkModal(data)}
                         IconSize={26}
                         btnClass="!p-0 !m-0 !w-auto text-green-600"
                     />
@@ -49,14 +65,14 @@ export default function ManageLinkCard({ item }) {
             <div>
                 <Input
                     type="clipboard"
-                    placeholder={item.title}
-                    value={item.title}
+                    placeholder={data.link}
+                    value={data.link}
                 // className="z-10"
                 />
                 <p className="text-gray-600 dark:text-gray-200 font-normal text-sm">
                     {" "}
                     <span className="font-bold text-base">Quick Note: </span>
-                    {item.body}
+                    {data.quickNote}
                 </p>
                 {/* <p className="text-gray-600 dark:text-gray-200 font-bold text-md">
   {item.title}

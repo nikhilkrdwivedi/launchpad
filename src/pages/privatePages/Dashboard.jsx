@@ -21,7 +21,11 @@ import ManageLinkCard from "@components/manage-links/ManageLinkCard";
 import NoDataFound from "@components/manage-links/NoDataFound";
 import ManageLinkList from "@components/manage-links/ManageLinkList";
 import FullScreenLoader from "@components/loaders/FullScreenLoader";
+import { ToastContainer, toast } from 'react-toastify';
+// import { showToastSuccess,  } from "../../helpers/toast";
+import { useTheme } from "@contexts/ThemeContext";
 
+  // import 'react-toastify/dist/ReactToastify.css';
 // export const TODOLIST_QUERY = gql`
 //   query @live {
 //     userCollection(first: 10) {
@@ -38,6 +42,7 @@ import FullScreenLoader from "@components/loaders/FullScreenLoader";
 export default function Dashboard() {
   // {userCollection: { edges: { node } }}
   // :{quickLinkCollection:{edges:quickLinksList}}
+  const { isDarkMode, toggleTheme } = useTheme();
   let { data, loading:quickLinksQueryLoading, error } = useQuery(QUICKLINKS_QUERY)
   console.log({data , quickLinksQueryLoading, error})
   const [createList] = useMutation(QUICKLINK__MUTATION)
@@ -57,13 +62,7 @@ export default function Dashboard() {
   }, [quickLinksQueryLoading]);
 
   
-  const postTitle = "Check out my awesome post!";
-  const postSummary = "A brief summary of the post";
-  const postSource = "Your Website Name";
-  const postUrl =
-    "https://www.youtube.com/watch?v=h2ZS5rTsuRQ&ab_channel=RichardOliverBray";
-  const tweetText = "Check out my awesome tweet!";
-  const tweetUrl = "https://your-tweet-url.com";
+
   const [_data, setData] = useState([]);
   // const fetchDate = async () => {
   //   let data = await fetch("https://jsonplaceholder.typicode.com/posts");
@@ -83,6 +82,12 @@ export default function Dashboard() {
         console.log('🚀 ~ file: Home.tsx:97 ~ onDidDismiss: ~ res', res)
     } catch (error) {
       console.log({error})
+      const errorMsg = error.message
+      // showToastSuccess(errorMsg, 'error')
+      toast(errorMsg, {
+        type:'error',
+        theme : isDarkMode ? 'dark' : 'light'
+      })
     }
   }
   const openEditLinkModal = (item) => {
@@ -94,9 +99,10 @@ export default function Dashboard() {
     setShowModal(false);
     setSelectedItem({});
   };
-
+  const notify = () => toast("Wow so easy!");
   return (
     <TopHeaderWrapper>
+       {/* <button onClick={notify}>Notify!</button> */}
       <Container className="flex-1 dark:bg-gray-900">
         <ManageLinkHeader onClick={() => openEditLinkModal({quickNote:new Date(), link: Date.now()})}>
         <FullScreenLoader  show={quickLinksQueryLoading} showCloseIcon={false}/>

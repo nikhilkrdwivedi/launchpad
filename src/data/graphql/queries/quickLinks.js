@@ -6,7 +6,7 @@ export const QUICKLINKS_QUERY = gql`
     edges {
       node {
         link
-        quickNotes
+        quickNote
         updatedAt
         id
         createdAt

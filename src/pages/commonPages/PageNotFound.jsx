@@ -1,7 +1,7 @@
 // import React from "react";
 import LottieAnimationWrapper from '@components/lottie-animations/LottieAnimationWrapper'
 import React from 'react'
-import noDataFoundJson from "../../assets/lottie-json/PageNotFound.json";
+import noDataFoundJson from "../../assets/lottie-json/pageNotFound.json";
 export default function PageNotFound() {
   return (
     <div className='flex justify-center items-center flex-col gap-4 h-screen bg-gray-200 dark:bg-gray-900'>

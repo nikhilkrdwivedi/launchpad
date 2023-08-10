@@ -11,78 +11,26 @@ import GetStarted from "@pages/publicPages/GetStarted";
 import PublicHomePage from "@pages/publicPages/Home";
 import Dashboard from "@pages/privatePages/Dashboard";
 import TopHeaderWrapper from "@components/headers/TopHeaderWrapper";
-
-// const PublicHome = () => {
-//   return (
-//     <Route>
-//       <Route element={<PublicHomePage />} path="/" exact />
-//       <Route element={<PublicHomePage />} path="/home" />
-//       <Route element={<GetStarted />} path="/get-started" />
-//       <Route path="*" element={<PageNotFound />} />
-//     </Route>
-//   );
-// };
-
-// const PrivateHome = () => {
-//   return (
-//     <Route element={<RequiredAuthentication />}>
-//       <Route element={<PrivateHomePage />} path="/" />
-//       <Route element={<PrivateHomePage />} path="/dashboard" />
-//     </Route>
-//   );
-// };
+import useAuthentication from "../hooks/useAuthentication";
 
 export default function Router() {
-  const token = localStorage.getItem("token");
-  //   let userCtx = localStorage.getItem("userCtx");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  console.log({ token });
-  //   if (token) {
-  //     userCtx = JSON.parse(userCtx);
-  //     if (isRoleRequired && !userCtx?.roles.includes(roleName)) {
-  //       return <AccessDenied />;
-  //     }
-  //     return <Outlet />;
-  //     // return <Navigate to="/" state={{ from: location }} replace />;
-  //   }
-  const validateToken = async () => {
-    // const data = await fetch("https://jsonplaceholder.typicode.com/posts");
-    // console.log({ data: await data.json() });
-  };
-  useEffect(() => {
-    validateToken();
-  }, [isLoggedIn]);
+  const { userContext, setUserContext, isAuthenticated } = useAuthentication();
+  console.log({ isAuthenticated, userContext });
   return (
     <Routes>
-      {isLoggedIn ? (
-        <Route
-        // element={<RequiredAuthentication />}
-        >
+      {isAuthenticated ? (
+        <>
           <Route element={<PrivateHomePage />} path="/" />
-          <Route element={<PrivateHomePage />} path="/dashboard" />
-        </Route>
+          <Route element={<Dashboard />} path="/dashboard" />
+        </>
       ) : (
-        <Route>
-          {/* <TopHeaderWrapper > */}
-          <Route element={<Dashboard />} path="/" />
-          {/* <Route element={<PublicHomePage />} path="/" /> */}
+        <>
+          <Route element={<PublicHomePage />} path="/" />
           <Route element={<PublicHomePage />} path="/home" />
           <Route element={<GetStarted />} path="/get-started" />
-          {/* <Route path="*" element={<PageNotFound />} /> */}
-          {/* </TopHeaderWrapper> */}
-        </Route>
+        </>
       )}
       <Route path="*" element={<PageNotFound />} />
-      {/* <Route index element={<PublicHome />} />
-      <PrivateRoute element={<PrivateHome />} /> */}
-      {/* <Route element={<RequiredAuthentication />}>
-        <Route element={<PrivateHomePage />} path="/" />
-        <Route element={<PrivateHomePage />} path="/dashboard" />
-      </Route>
-      <Route element={<PublicHomePage />} path="/" exact />
-      <Route element={<PublicHomePage />} path="/home" />
-      <Route element={<LoginPage />} path="/login" />
-      <Route path="*" element={<PageNotFound />} /> */}
     </Routes>
   );
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import * as dotenv from "dotenv";
 dotenv.config();
 
@@ -11,7 +12,7 @@ export const environment = {
   },
   SERVER: process.env.SERVER || `http://localhost:3020`,
   JWT_SECRET: process.env.JWT_SECRET || "JWT_SECRET123321JWT_SECRET",
-  ISSUER_URL: process.env.ISSUER_URL || "https://devdactic.com",
+  ISSUER_URL: process.env.ISSUER_URL || "https://launchpad-nikhilkrdwivedi.vercel.app",
 };
 
 export default environment;

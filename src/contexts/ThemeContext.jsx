@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 /**
  * @author nikhilkrdwivedi
  *
  *
  */
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext();
 
@@ -13,7 +14,7 @@ export function ThemeProvider({ children }) {
     const body = document.body;
     // const body = document.getElementById('root');
 
-    console.log({ body, isDarkMode });
+    // console.log({ body, isDarkMode });
     if (isDarkMode) {
       body.classList.add("dark");
     } else {
@@ -22,13 +23,6 @@ export function ThemeProvider({ children }) {
   }, [isDarkMode]);
 
   const toggleTheme = () => {
-    // const body = document.getElementById('root');
-    // console.log({body, isDarkMode})
-    // if (isDarkMode) {
-    //   body.classList.add("dark");
-    // } else {
-    //   body.classList.remove("dark");
-    // }
     setIsDarkMode((prevMode) => !prevMode);
   };
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -195,6 +196,7 @@ export const register = async (request, response) => {
     // token issue with validation
     const token = jwt.sign({ userId: user._id }, environment.JWT_SECRET, {
       expiresIn: AUTH_CONSTANTS.expiresIn,
+      issuer: environment.ISSUER_URL
     });
 
     // add token to user token mapping

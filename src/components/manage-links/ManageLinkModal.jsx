@@ -16,7 +16,7 @@ export default function ManageLinkModal({
   onChange,
   actionClick,
 }) {
-  console.log({datadata: data})
+  // console.log({datadata: data})
   return (
     <div>
       <Modal
@@ -24,8 +24,18 @@ export default function ManageLinkModal({
         closeModal={closeModal}
         isOpen={isOpen}
         title={title}
-        body={<ManageLinkModalBody data={data} onChange={(value, key)=>onChange(value, key)} />}
-        footer={<ManageLinkModalFooter cancelClick={closeModal} actionClick={actionClick} />}
+        body={
+          <ManageLinkModalBody
+            data={data}
+            onChange={(value, key) => onChange(value, key)}
+          />
+        }
+        footer={
+          <ManageLinkModalFooter
+            cancelClick={closeModal}
+            actionClick={actionClick}
+          />
+        }
       />
     </div>
   );

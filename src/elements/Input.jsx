@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { TbClipboardCopy } from "react-icons/tb";
+import ErrorText from "./ErrorText";
 // import ErrorText from "./ErrorText";
 
 function Input({
@@ -14,7 +15,8 @@ function Input({
   classNames,
   isHide,
   readOnly,
-  // error,
+  error,
+  errorClass,
 }) {
   const [showPassword, setShowPassword] = useState(true);
   return (
@@ -27,7 +29,11 @@ function Input({
         htmlFor="inputField"
         className="form-label text-gray-500 w-full text-sm"
       >
-        {label}
+        <div className="flex justify-start items-center gap-2">
+          {label}
+          <ErrorText error={error} classNames={errorClass} />
+        </div>
+
         <input
           readOnly={readOnly}
           type={showPassword ? type : "text"}
@@ -96,6 +102,7 @@ Input.propTypes = {
   isHide: PropTypes.bool,
   readOnly: PropTypes.bool,
   error: PropTypes.string,
+  errorClass: PropTypes.string,
 };
 Input.defaultProps = {
   placeholder: "",
@@ -104,7 +111,8 @@ Input.defaultProps = {
   isHide: false,
   readOnly: false,
   error: "",
+  errorClass: "",
   onChange: null,
-  type:"text"
+  type: "text",
 };
 export default Input;

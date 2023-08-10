@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import httpResponseMessages from "../../constants/httpResponseMessages.js";
 export const error = function error(error, response) {
   let errorMsg;
@@ -14,8 +15,8 @@ export const error = function error(error, response) {
   }
   return response.status(error.status || 400).json({
     success: false,
-    message: httpResponseMessages.BAD_REQUEST,
-    error: errorMsg,
+    message: errorMsg,
+    error: httpResponseMessages.BAD_REQUEST,
   });
 };
 

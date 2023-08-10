@@ -117,7 +117,7 @@ export default function MobileHeader() {
                                                 {/* <div className="mx-auto w-full max-w-md bg-white dark:bg-black"> */}
                                                 <div className="flex flex-col h-full justify-between" >
                                                     <div className="overflow-auto">
-                                                        <div className="flex items-center gap-2 px-4 py-2 text-gray-600 dark:text-gray-200 bg-gray-50 dark:bg-gray-800 border-b-2 border-gray-300 dark:border-gray-600">
+                                                        <div className="flex items-center gap-2 px-4 py-2 text-gray-600 dark:text-gray-200 bg-gray-50 dark:bg-gray-800 border-b-2 border-gray-300 dark:border-gray-600  cursor-pointer">
                                                             <div>
                                                                 <BiSolidUserDetail size={24} />
                                                             </div>
@@ -127,7 +127,7 @@ export default function MobileHeader() {
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <div className="flex items-center gap-2 px-4 py-2 text-gray-600 dark:text-gray-200 bg-gray-50 dark:bg-gray-800 border-y-2 border-gray-300 dark:border-gray-600">
+                                                        <div className="flex items-center gap-2 px-4 py-2 text-gray-600 dark:text-gray-200 bg-gray-50 dark:bg-gray-800 border-y-2 border-gray-300 dark:border-gray-600  cursor-pointer">
                                                             <div>
                                                                 <BiSolidUserDetail size={24} className="text-gray-600 dark:text-gray-200" />
                                                             </div>

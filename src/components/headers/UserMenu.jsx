@@ -33,7 +33,7 @@ export default function UserMenu() {
           <div className="px-4 py-2">
             <Menu.Item>{({ active }) => 
             (
-                <div className="flex justify-start items-center gap-4 text-gray-600 dark:text-gray-200">
+                <div className="flex justify-start items-center gap-4 text-gray-600 dark:text-gray-200 cursor-pointer">
                     <div><BiSolidUserDetail size={24}/></div>
                     <div className="text-md font-semibold">View Profile</div>
                 </div>
@@ -46,7 +46,7 @@ export default function UserMenu() {
                 </div>)}</Menu.Item>
           </div> */}
           <div className="px-4 py-2">
-            <Menu.Item>{({ active }) => (<div className="flex justify-start items-center gap-4 text-gray-600 dark:text-gray-200">
+            <Menu.Item>{({ active }) => (<div className="flex justify-start items-center gap-4 text-gray-600 dark:text-gray-200 cursor-pointer">
                     <div><RiLogoutCircleRLine size={24}/></div>
                     <div className="text-md font-semibold">Sign Out</div>
                 </div>)}</Menu.Item>

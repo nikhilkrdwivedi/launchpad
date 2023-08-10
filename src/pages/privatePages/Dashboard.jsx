@@ -66,16 +66,6 @@ export default function Dashboard() {
 
   
 
-  // const [_data, setData] = useState([]);
-  // const fetchDate = async () => {
-  //   let data = await fetch("https://jsonplaceholder.typicode.com/posts");
-  //   // console.log({ data: await data.json() });
-  //   data = await data.json();
-  //   setData(data);
-  // };
-  useEffect(() => {
-    // fetchDate();
-  }, []);
   const saveLink = async () => {
     try {
       console.log({selectedItem})
@@ -84,7 +74,6 @@ export default function Dashboard() {
           variables: selectedItem,
           refetchQueries: [QUICKLINKS_QUERY]
         })
-        // updateList
         setShowModal(false)
         toast('Great news! Your changes have been saved. 😃', {
           type:'success',

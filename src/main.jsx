@@ -16,10 +16,10 @@ import { getOperationAST } from 'graphql'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import { SignJWT } from 'jose'
-
+// import  Jwt  from "jsonwebtoken";
 // Example of genreating a JWT:
 // const secret = new Uint8Array(
-//   'mysupersecretk3y!'.split('').map((c) => c.charCodeAt(0)),
+//   'JWT_SECRET123321JWT_SECRET'.split('').map((c) => c.charCodeAt(0)),
 // )
 
 // const getToken = () => {
@@ -33,8 +33,8 @@ import 'react-toastify/dist/ReactToastify.css';
 // getToken().then(tokenn=>{
 //   console.log({tokenn})
 // })
-// const GRAFBASE_API_URL = 'http://127.0.0.1:4000/graphql'
-const GRAFBASE_API_URL = 'https://launchpad-master-nikhilkrdwivedi.grafbase.app/graphql'
+const GRAFBASE_API_URL = 'http://127.0.0.1:4000/graphql'
+// const GRAFBASE_API_URL = 'https://launchpad-master-nikhilkrdwivedi.grafbase.app/graphql'
 // 'https://grafbase-app-ionic-main-saimon24.grafbase.app/graphql'
 
 // Use JWT in a real app or API Key for testing with x-api-key

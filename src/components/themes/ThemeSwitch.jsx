@@ -27,7 +27,7 @@ export default function ThemeSwitch({themeSwitchClass}) {
                 className={`${isDarkMode ? 'translate-x-9' : 'translate-x-0'}
             pointer-events-none h-[30px] w-[30px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out
             flex justify-center items-center`}
-            >{isDarkMode ? <BiSolidMoon /> : <BiSolidSun />}</span>
+            >{isDarkMode ? <BiSolidMoon className= 'text-gray-700' /> : <BiSolidSun className='text-yellow-500'  />}</span>
         </Switch>
 
     )

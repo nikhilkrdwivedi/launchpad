@@ -1,7 +1,7 @@
 // import swagger from "swagger-ui-express";
 
-// import environment from "./configurations/environment";
-const environment= { PORT: 2020}
+import environment from "./configurations/environment.js";
+// const environment= { PORT: 2020}
 // import swaggerDocs from "./swagger/docs";
 import dbConnect from "./startup/dbConnect.js";
 import createServer from "./startup/server.js";

@@ -27,8 +27,8 @@ export default function GetStarted() {
   const navigate = useNavigate();
   const [renderSignInForm, setRenderSignInForm] = useState(true);
   const [form, setForm] = useState({
-    email: "authornikhildwivedi@gmail.com",
-    password: "Nikhil123.@",
+    email: 'pankaj.dwivedi@gmail.com',//"authornikhildwivedi@gmail.com",
+    password: "Pankaj123.@",
   });
 
   const [formErrors, setFormErrors] = useState({});

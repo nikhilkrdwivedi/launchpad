@@ -4,7 +4,7 @@ import React from "react";
 import { useLottie } from "lottie-react";
 
 const LottieAnimationWrapper = ({animationData,lottieClass,loop=true}) => {
-  console.log({animationData})
+  // console.log({animationData})
   const options = {
     animationData,
     loop

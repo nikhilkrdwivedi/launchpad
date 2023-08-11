@@ -1,19 +1,20 @@
 import { useQuery, gql, useMutation } from '@apollo/client'
 
 export const QUICKLINKS_QUERY = gql`
-  query QuickLinkCollection($first: Int) { #$after:String, after:$after
-    quickLinkCollection(first: $first , orderBy:{createdAt:DESC}) {
+  query QuickLinkCollection($first: Int, $after: String, $authorId: String) {
+    quickLinkCollection(first: $first , after: $after, query: $authorId, orderBy:{createdAt:ASC}) {
     edges {
       node {
         link
         quickNote
+        authorId
         updatedAt
         id
         createdAt
       }
     }
     pageInfo {
-        hasPreviousPage
+      hasPreviousPage
       hasNextPage
       startCursor
       endCursor
@@ -70,8 +71,8 @@ export const USERS_QUERY = gql`
 
 
 export const CREATE_QUICKLINK__MUTATION = gql`
-  mutation QuickLinkCreate($link: String!, $quickNote: String!) {
-    quickLinkCreate(input: { link: $link, quickNote: $quickNote }) {
+  mutation QuickLinkCreate($link: String!, $quickNote: String!,$authorId: String!) {
+    quickLinkCreate(input: { link: $link, quickNote: $quickNote,authorId:$authorId }) {
         quickLink {
             link
             quickNote
@@ -80,8 +81,8 @@ export const CREATE_QUICKLINK__MUTATION = gql`
   }
 `
 export const UPDATE_QUICKLINK__MUTATION = gql`
-mutation QuickLinkUpdate ($id: ID, $link:String, $quickNote: String ){
-  quickLinkUpdate(by: {id:$id}, input:{link:$link, quickNote: $quickNote}) {
+mutation QuickLinkUpdate ($id: ID, $link:String, $quickNote: String,$authorId: String! ){
+  quickLinkUpdate(by: {id:$id}, input:{link:$link, quickNote: $quickNote,authorId:$authorId}) {
     quickLink {
       link
       quickNote

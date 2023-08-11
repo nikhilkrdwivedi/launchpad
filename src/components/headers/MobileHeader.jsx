@@ -26,7 +26,7 @@ import { logout } from "../../data/rest/authentication";
 
 export default function MobileHeader() {
   const navigate = useNavigate();
-  const { resetIsAuthenticatedAndUserContext } = useAuthentication();
+  const { resetIsAuthenticatedAndUserContext, userContext } = useAuthentication();
   const { isDarkMode } = useTheme();
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
@@ -115,22 +115,23 @@ export default function MobileHeader() {
                       <div className="bg-gray-100 dark:bg-gray-900  shadow-md dark:shadow-sm shadow-gray-200 dark:shadow-gray-600">
                         <Dialog.Title className="flex items-center p-3">
                           <div>
-                            <div className="h-[34px] w-[34px] rounded-full bg-gray-100 dark:bg-gray-800 flex justify-center items-center text-lg font-semibold shadow-md shadow-gray-400 dark:shadow-gray-200 ">
-                              N
+                            <div className="h-[34px] w-[34px] rounded-full bg-gray-100 dark:bg-gray-800 flex justify-center items-center text-lg font-semibold shadow-md shadow-gray-400 dark:shadow-gray-200 text-gray-600 dark:text-gray-200 ">
+                            {userContext?.name?.charAt(0) || '😀'}
                             </div>
                           </div>
 
                           <div className="flex flex-col w-full">
-                            <span className="text-gray-600 dark:text-white text-sm font-semibold px-2 truncate text-ellipsis w-5/6">
-                              Nikhil Kumar Dwivedi
-                            </span>
-                            <span className="flex items-center gap-1 text-gray-400 text-xs font-normal px-2 truncate text-ellipsis w-5/6">
-                              @nikhil.dwivedi
+                            <span className="flex items-center gap-1 text-gray-600 dark:text-white text-sm font-semibold px-2 truncate text-ellipsis w-5/6">
+                              {userContext?.name || 'NA'}
                               <FaTwitterSquare
                                 width="16px"
                                 height="16px"
                                 className="text-green-600 dark:text-yellow-600"
                               />
+                            </span>
+                            <span className=" text-gray-400 text-xs font-normal px-2 truncate text-ellipsis w-5/6">
+                            {userContext?.email}
+                             
                             </span>
                           </div>
                           <div>

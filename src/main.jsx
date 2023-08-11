@@ -16,27 +16,25 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "@contexts/AuthContext.jsx";
 
-// const GRAFBASE_API_URL = "http://127.0.0.1:4000/graphql";
-const GRAFBASE_API_URL =
-  "https://launchpad-master-nikhilkrdwivedi.grafbase.app/graphql";
+const GRAFBASE_API_URL = "http://127.0.0.1:4000/graphql";
+// const GRAFBASE_API_URL =
+  // "https://launchpad-master-nikhilkrdwivedi.grafbase.app/graphql";
 
 // Use JWT in a real app or API Key for testing with x-api-key
-const JWT_TOKEN_Bearer = `Bearer ${localStorage.getItem("token")}`;
-const JWT_TOKEN = localStorage.getItem("token");
+const JWT_TOKEN = `Bearer ${localStorage.getItem("token")}`;
+// const JWT_TOKEN = localStorage.getItem("token");
 export const createApolloLink = () => {
   const sseLink = new SSELink({
     uri: GRAFBASE_API_URL,
     headers: {
-      authorization: JWT_TOKEN_Bearer,
-      "x-api-key": JWT_TOKEN,
+      authorization: JWT_TOKEN,
     },
   });
 
   const httpLink = new HttpLink({
     uri: GRAFBASE_API_URL,
     headers: {
-      authorization: JWT_TOKEN_Bearer,
-      "x-api-key": JWT_TOKEN,
+      authorization: JWT_TOKEN,
     },
   });
 

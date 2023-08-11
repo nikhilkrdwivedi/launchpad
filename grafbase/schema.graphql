@@ -52,6 +52,7 @@ type User @model {
 type QuickLink @model {
   link: String!
   quickNote: String!
+  authorId: String!
   # posts: [Post]
   # comments: [Comment]
 

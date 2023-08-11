@@ -18,7 +18,8 @@ import FullScreenLoader from "@components/loaders/FullScreenLoader";
 import { toast } from "react-toastify";
 // import { showToastSuccess,  } from "../../helpers/toast";
 import { useTheme } from "@contexts/ThemeContext";
-
+import Button from "@elements/Button";
+import useAuthentication from "../../hooks/useAuthentication";
 // import 'react-toastify/dist/ReactToastify.css';
 // export const TODOLIST_QUERY = gql`
 //   query @live {
@@ -34,6 +35,16 @@ import { useTheme } from "@contexts/ThemeContext";
 // `
 
 export default function Dashboard() {
+  const {
+    userContext,
+    setUserContext,
+    isAuthenticated,
+    setIsAuthenticatedAndUserContext,
+  } = useAuthentication();
+  console.log({userContext,
+    setUserContext,
+    isAuthenticated,
+    setIsAuthenticatedAndUserContext,})
   // {userCollection: { edges: { node } }}
   // :{quickLinkCollection:{edges:quickLinksList}}
   const { isDarkMode } = useTheme();
@@ -41,9 +52,12 @@ export default function Dashboard() {
     data,
     loading: quickLinksQueryLoading,
     error,
-  } = useQuery(QUICKLINKS_QUERY, {
-    variables: { first: 2 },
-  });
+    fetchMore,
+  } = useQuery(QUICKLINKS_QUERY,
+    {
+      variables: { first: 1, authorId: userContext?._id },
+    }
+  );
   console.log({ data, quickLinksQueryLoading, error });
   const [createList] = useMutation(CREATE_QUICKLINK__MUTATION);
   const [updateList] = useMutation(UPDATE_QUICKLINK__MUTATION);
@@ -52,13 +66,13 @@ export default function Dashboard() {
   const [selectedItem, setSelectedItem] = useState({});
   const [quickLinksList, setQuickLinksList] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
+
   useMemo(() => {
-    // console.log("!");
+    console.log("__________!_________");
     if (data) {
       const {
         quickLinkCollection: { edges: list, pageInfo },
       } = data;
-      // console.log({ list, pageInfo });
       setQuickLinksList(list);
       setPageInfo(pageInfo);
     }
@@ -66,9 +80,10 @@ export default function Dashboard() {
 
   const saveLink = async () => {
     try {
-      const call = selectedItem.id ? updateList : createList;
+      let payload = {...selectedItem, authorId: userContext?._id };
+      const call = payload.id ? updateList : createList;
       const res = await call({
-        variables: selectedItem,
+        variables: payload,
         refetchQueries: [QUICKLINKS_QUERY],
       });
       setShowModal(false);
@@ -108,8 +123,36 @@ export default function Dashboard() {
             data={quickLinksList}
             onClick={(item) => openManageLinkModal(item)}
           />
+          {pageInfo.hasNextPage && (
+            <div className="flex items-center justify-center m-2 p-8 rounded-full">
+              <Button
+                btnClass="bg-green-400 p-2 w-auto"
+                title="Load More"
+                onClick={() =>
+                  fetchMore({
+                    variables: { after: pageInfo.endCursor },
+                    updateQuery: (prevResult, { fetchMoreResult }) => {
+                      if (!fetchMoreResult) return prevResult;
+                      return {
+                        quickLinkCollection: {
+                          __typename: 'quickLinkCollection',
+                          edges: [
+                            ...prevResult.quickLinkCollection.edges,
+                            ...fetchMoreResult.quickLinkCollection.edges,
+                          ],
+                          pageInfo: fetchMoreResult.quickLinkCollection.pageInfo,
+                        },
+                      };
+                    },
+                  })
+                }
+              >
+                Load More
+              </Button>
+            </div>
+
+          )}
           <NoDataFound loading={quickLinksQueryLoading} data={quickLinksList} />
-          {/* {console.log({ selectedItem })} */}
           <EditLinkModal
             openModal={() => setShowModal(true)}
             closeModal={() => closeManageLinkModal()}
@@ -118,7 +161,6 @@ export default function Dashboard() {
             isOpen={showModal}
             actionClick={() => saveLink()}
             onChange={(value, key) => {
-              // console.log({ value, key });
               setSelectedItem((prev) => ({ ...prev, [key]: value }));
             }}
           />

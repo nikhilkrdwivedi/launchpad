@@ -14,8 +14,13 @@ export function AuthProvider({ children }) {
   async function validateUserToken() {
     try {
       console.log("===========++++++++++++++++++++++===============");
+      console.log("Pankaj: ",userContext )
+
       await validateToken();
+      setUserContext(JSON.parse(localStorage.getItem('userCtx')))
       setIsAuthenticated(true);
+      console.log("NIKHIL: ",userContext )
+
     } catch (error) {
       removeLocalStorage(["userCtx", "token"]);
       setIsAuthenticated(false);
@@ -28,7 +33,8 @@ export function AuthProvider({ children }) {
     removeLocalStorage(["userCtx", "token"]);
   };
   const setIsAuthenticatedAndUserContext = ({ token, userCtx }) => {
-    setUserContext({ token, userCtx });
+    console.log({ token, userCtx})
+    setUserContext({ userCtx });
     setIsAuthenticated(true);
   };
   React.useEffect(() => {

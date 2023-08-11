@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { BiSolidUserDetail } from "react-icons/bi";
 export default function UserMenu() {
-  const { resetIsAuthenticatedAndUserContext } = useAuthentication();
+  const { resetIsAuthenticatedAndUserContext, userContext } = useAuthentication();
   const navigate = useNavigate();
   const { isDarkMode } = useTheme();
   async function logoutUser() {
@@ -38,7 +38,8 @@ export default function UserMenu() {
       <div className="flex items-center w-auto justify-center">
         <Menu.Button className="flex w-full justify-between items-center gap-2 text-gray-600 dark:text-gray-200">
           <div className="h-[34px] w-[34px] rounded-full bg-gray-100 dark:bg-gray-800 flex justify-center items-center text-lg font-semibold shadow-md shadow-gray-400 dark:shadow-gray-200 ">
-            N
+            {console.log("quck quck ",userContext?.name)}
+          {userContext?.name?.charAt(0) || '😀'}
           </div>
           <HiMiniChevronDown
             size={24}

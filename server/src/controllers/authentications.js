@@ -8,7 +8,9 @@ import environment from "../configurations/environment.js";
 import { fetchOne, update, create } from "../providers/authentications.js";
 import { AUTH_CONSTANTS } from "../constants/authentications.js";
 import { transformUserToReturnToClient } from "../helpers/authentication.js";
-
+const secret = new Uint8Array(
+  environment.JWT_SECRET.split('').map((c) => c.charCodeAt(0)),
+)
 
 export const login = async (request, response) => {
   try {
@@ -37,9 +39,15 @@ export const login = async (request, response) => {
       });
     }
     // token issue with validation
-    const token = jwt.sign({ userId: user._id }, environment.JWT_SECRET, {
-      expiresIn: AUTH_CONSTANTS.expiresIn,
-    });
+    // const token = jwt.sign({ userId: user._id }, environment.JWT_SECRET, {
+    //   expiresIn: AUTH_CONSTANTS.expiresIn,
+    // });
+
+    const token = jwt.sign({ userId: user._id}, secret, {
+        expiresIn: AUTH_CONSTANTS.expiresIn,
+        issuer: environment.ISSUER_URL,
+        algorithm: 'HS256'
+      });
 
     let updatedUser = await update(
       { _id: user._id },
@@ -86,7 +94,10 @@ export const logout = async (request, response) => {
     token = token.replace(/\"/g, "");
     const { allDeviceLogout } = request.body || false;
     const user = request.user;
-    const isValidToken = jwt.verify(token, environment.JWT_SECRET);
+    const isValidToken = jwt.verify(token, secret, {
+      issuer: environment.ISSUER_URL,
+      algorithm: 'HS256'
+    });
     if (!isValidToken) {
       return response.status(401).json({
         success: false,
@@ -127,7 +138,10 @@ export const validateToken = async (request, response) => {
 
     token = token.replace(/\"/g, "");
 
-    const isValidToken = jwt.verify(token, environment.JWT_SECRET);
+    const isValidToken = jwt.verify(token, secret,{
+      issuer: environment.ISSUER_URL,
+      algorithm: 'HS256'
+    });
 
     if (!isValidToken) {
       return response.status(401).json({
@@ -136,6 +150,7 @@ export const validateToken = async (request, response) => {
         error: null,
       });
     }
+    console.log({isValidToken})
     const { userId } = isValidToken;
     let user = await fetchOne({
       _id: userId,
@@ -194,9 +209,10 @@ export const register = async (request, response) => {
     const user = await create(registerUser);
 
     // token issue with validation
-    const token = jwt.sign({ userId: user._id }, environment.JWT_SECRET, {
+    const token = jwt.sign({ userId: user._id }, secret, {
       expiresIn: AUTH_CONSTANTS.expiresIn,
-      issuer: environment.ISSUER_URL
+        issuer: environment.ISSUER_URL,
+        algorithm: 'HS256'
     });
 
     // add token to user token mapping

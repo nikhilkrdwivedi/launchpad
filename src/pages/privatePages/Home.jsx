@@ -1,5 +1,6 @@
 // import React from "react";
 
+import HomePageBanner from "@components/banners/HomePageBanner";
 import Button from "@elements/Button";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +16,7 @@ export default function Home() {
           navigate("/dashboard");
         }}
       />
+      <HomePageBanner />
     </div>
   );
 }

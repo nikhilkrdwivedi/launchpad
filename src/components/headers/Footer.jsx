@@ -8,11 +8,11 @@ import { FaTwitterSquare } from "react-icons/fa";
 import { FaSquareGithub, FaLinkedin } from "react-icons/fa6";
 import Link from "@elements/Link";
 
-export default function Footers() {
+export default function Footer() {
   const { isDarkMode, toggleTheme } = useTheme();
 
   return (
-    <div className="flex justify-center items-center flex-col gap-4 p-8 border-t-2 border-gray-200 dark:border-gray-400 rounded-md">
+    <div className="flex justify-center items-center flex-col gap-4 p-8 border-t border-gray-200 dark:border-gray-600 ">
       <div className="flex justify-center items-center gap-4">
         <img src={isDarkMode ? lightLogo : darkLogo} className="w-16 h-16" />
         <p className="text-2xl font-medium font-mono text-gray-600 dark:text-gray-300">

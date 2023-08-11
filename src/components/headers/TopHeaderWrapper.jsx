@@ -7,7 +7,7 @@ import MobileHeader from "./MobileHeader";
 
 export default function TopHeaderWrapper({ children }) {
   return (
-    <div className="flex flex-col h-screen dark:bg-gray-900">
+    <div className="flex flex-col h-screen overflow-auto dark:bg-gray-900">
       <Header />
       <MobileHeader />
       {children}

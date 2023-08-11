@@ -20,6 +20,13 @@ import { toast } from "react-toastify";
 import { useTheme } from "@contexts/ThemeContext";
 import Button from "@elements/Button";
 import useAuthentication from "../../hooks/useAuthentication";
+import myImg from '@assets/myImg.jpg'
+import Input from "@elements/Input";
+import UpdatePasswordCard from "@components/profiles/UpdatePasswordCard";
+import ProfileCard from "@components/profiles/ProfileCard";
+import LogoutCard from "@components/profiles/LogoutCard";
+// import Button from "@elements/Button";
+
 // import 'react-toastify/dist/ReactToastify.css';
 // export const TODOLIST_QUERY = gql`
 //   query @live {
@@ -34,7 +41,7 @@ import useAuthentication from "../../hooks/useAuthentication";
 //   }
 // `
 
-export default function Dashboard() {
+export default function Profile() {
   const {
     userContext,
     setUserContext,
@@ -110,62 +117,16 @@ export default function Dashboard() {
   };
   return (
     <TopHeaderWrapper>
-      <Container className="flex-1 dark:bg-gray-900 px-4 md:px-20 md:py-4">
-        <ManageLinkHeader
-          onClick={() => openManageLinkModal({ quickNote: "", link: "" })}
-        >
-          <FullScreenLoader
-            show={quickLinksQueryLoading}
-            showCloseIcon={false}
-          />
-          {console.log({quickLinksList})}
-          <ManageLinkList
-            loading={quickLinksQueryLoading}
-            data={quickLinksList}
-            onClick={(item) => openManageLinkModal(item)}
-          />
-          {pageInfo.hasNextPage && (
-            <div className="flex items-center justify-center m-2 p-8 rounded-full">
-              <Button
-                btnClass="bg-green-400 p-2 w-auto"
-                title="Load More"
-                onClick={() =>
-                  fetchMore({
-                    variables: { after: pageInfo.endCursor },
-                    updateQuery: (prevResult, { fetchMoreResult }) => {
-                      if (!fetchMoreResult) return prevResult;
-                      return {
-                        quickLinkSearch: {
-                          __typename: 'quickLinkSearch',
-                          edges: [
-                            ...fetchMoreResult.quickLinkSearch.edges,
-                            ...prevResult.quickLinkSearch.edges,
-                          ],
-                          pageInfo: fetchMoreResult.quickLinkSearch.pageInfo,
-                        },
-                      };
-                    },
-                  })
-                }
-              >
-                Load More
-              </Button>
+      <Container className="flex-1 p-4 md:px-20 md:py-4">
+        <div className="w-full lg:w-3/5 m-auto grid grid-cols-1 md:grid-cols-2 md:h-full content-center gap-4">
+            <div className="flex flex-col gap-2">
+               <ProfileCard />
             </div>
-
-          )}
-          <NoDataFound loading={quickLinksQueryLoading} data={quickLinksList} />
-          <EditLinkModal
-            openModal={() => setShowModal(true)}
-            closeModal={() => closeManageLinkModal()}
-            data={selectedItem}
-            title={"Edit Quick Link"}
-            isOpen={showModal}
-            actionClick={() => saveLink()}
-            onChange={(value, key) => {
-              setSelectedItem((prev) => ({ ...prev, [key]: value }));
-            }}
-          />
-        </ManageLinkHeader>
+            <div className="flex flex-col justify-between gap-2">
+               <UpdatePasswordCard /> 
+               <LogoutCard /> 
+            </div>
+        </div>
       </Container>
     </TopHeaderWrapper>
   );

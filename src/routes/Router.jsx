@@ -12,6 +12,7 @@ import PublicHomePage from "@pages/publicPages/Home";
 import Dashboard from "@pages/privatePages/Dashboard";
 import TopHeaderWrapper from "@components/headers/TopHeaderWrapper";
 import useAuthentication from "../hooks/useAuthentication";
+import Profile from "@pages/privatePages/Profile";
 
 export default function Router() {
   const { userContext, setUserContext, isAuthenticated } = useAuthentication();
@@ -20,8 +21,9 @@ export default function Router() {
     <Routes>
       {isAuthenticated ? (
         <>
-          <Route element={<PrivateHomePage />} path="/" />
+          <Route element={<Dashboard />} path="/" />
           <Route element={<Dashboard />} path="/dashboard" />
+          <Route element={<Profile />} path="/profile" />
         </>
       ) : (
         <>

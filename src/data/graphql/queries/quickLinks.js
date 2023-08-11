@@ -2,7 +2,7 @@ import { useQuery, gql, useMutation } from '@apollo/client'
 
 export const QUICKLINKS_QUERY = gql`
   query QuickLinkCollection($first: Int, $after: String, $authorId: String) {
-    quickLinkCollection(first: $first , after: $after, query: $authorId, orderBy:{createdAt:ASC}) {
+    quickLinkSearch(first: $first , after: $after, filter: {authorId:{eq:$authorId}},) {# orderBy:{createdAt:ASC}
     edges {
       node {
         link

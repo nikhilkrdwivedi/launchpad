@@ -8,6 +8,7 @@ import environment from "../configurations/environment.js";
 import { fetchOne, update, create } from "../providers/authentications.js";
 import { AUTH_CONSTANTS } from "../constants/authentications.js";
 import { transformUserToReturnToClient } from "../helpers/authentication.js";
+
 const secret = new Uint8Array(
   environment.JWT_SECRET.split('').map((c) => c.charCodeAt(0)),
 )

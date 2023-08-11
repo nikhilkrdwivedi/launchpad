@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { BiSolidUserDetail } from "react-icons/bi";
 export default function UserMenu() {
-  const { resetIsAuthenticatedAndUserContext, userContext } = useAuthentication();
+  const { resetIsAuthenticatedAndUserContext, userContext, isAuthenticated } = useAuthentication();
   const navigate = useNavigate();
   const { isDarkMode } = useTheme();
   async function logoutUser() {
@@ -30,6 +30,7 @@ export default function UserMenu() {
       });
     }
   }
+  if(!isAuthenticated) return null;
   return (
     <Menu
       as="div"
@@ -60,7 +61,9 @@ export default function UserMenu() {
           <div className="px-4 py-2">
             <Menu.Item>
               {() => (
-                <div className="flex justify-start items-center gap-4 text-gray-600 dark:text-gray-200 cursor-pointer">
+                <div
+                onClick={()=>navigate("/profile")}
+                 className="flex justify-start items-center gap-4 text-gray-600 dark:text-gray-200 cursor-pointer">
                   <div>
                     <BiSolidUserDetail size={24} />
                   </div>

@@ -36,6 +36,7 @@ export function AuthProvider({ children }) {
     console.log({ token, userCtx})
     setUserContext({ userCtx });
     setIsAuthenticated(true);
+    // window.location.reload('/')
   };
   React.useEffect(() => {
     let userCtx = localStorage.getItem("userCtx");
@@ -48,16 +49,19 @@ export function AuthProvider({ children }) {
       resetIsAuthenticatedAndUserContext();
     }
   }, []);
-  const authArgs = useMemo(
-    () => ({
+  const authArgs =
+  //  useMemo(
+  //   () => (
+      {
       userContext,
       setUserContext,
       isAuthenticated,
       setIsAuthenticatedAndUserContext,
       resetIsAuthenticatedAndUserContext,
-    }),
-    [userContext, isAuthenticated]
-  );
+    }
+  //   ),
+  //   [userContext, isAuthenticated]
+  // );
   return (
     <AuthContext.Provider value={authArgs}>{children}</AuthContext.Provider>
   );

@@ -49,7 +49,7 @@ type User @model {
   # gravatar: URL @resolver(name: "user/gravatar")
 }
 
-type QuickLink @model {
+type QuickLink @model @search {
   link: String!
   quickNote: String!
   authorId: String!

@@ -12,7 +12,7 @@ function getBackendUrl(env = "") {
     return "http://localhost:3020";
   }
   if (env.toLowerCase().trim() === "prod") {
-    return "http://localhost:3020";
+    return "https://launchpad-api.whoisnikhil.com";
   }
   return "http://localhost:3020";
 }

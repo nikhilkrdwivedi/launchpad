@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import ErrorText from "./ErrorText";
 
 function TextArea({
   label,
@@ -10,7 +11,8 @@ function TextArea({
   classNames,
   isHide,
   readOnly,
-  // error,
+  error,
+  errorClass,
 }) {
   return (
     <div
@@ -22,7 +24,10 @@ function TextArea({
         htmlFor="inputField"
         className="form-label text-gray-500 w-full text-sm"
       >
-        {label}
+        <div className="flex justify-start items-center gap-2">
+          {label}
+          <ErrorText error={error} classNames={errorClass} />
+        </div>
         <textarea
           readOnly={readOnly}
           onChange={onChange}
@@ -47,7 +52,6 @@ function TextArea({
         focus:text-gray-700 focus:bg-white focus:border-gray-400 ${classNames} `}
         />
       </label>
-      {/* <ErrorText error={error} classNames="py-1" /> */}
     </div>
   );
 }
@@ -63,6 +67,7 @@ TextArea.propTypes = {
   readOnly: PropTypes.bool,
   error: PropTypes.string,
   rows: PropTypes.number,
+  errorClass: PropTypes.string,
 };
 TextArea.defaultProps = {
   placeholder: "",
@@ -73,5 +78,6 @@ TextArea.defaultProps = {
   error: "",
   onChange: null,
   rows: 3,
+  errorClass: "",
 };
 export default TextArea;

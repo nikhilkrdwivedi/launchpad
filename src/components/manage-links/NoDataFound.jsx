@@ -1,5 +1,6 @@
-import LottieAnimationWrapper from "@components/lottie-animations/LottieAnimationWrapper";
+/* eslint-disable react/no-unescaped-entities */
 import PropTypes from "prop-types";
+import LottieAnimationWrapper from "@components/lottie-animations/LottieAnimationWrapper";
 import noDataFoundJson from "@assets/lottie-json/noDataFound.json";
 export default function NoDataFound({ loading, data = [] }) {
   return (

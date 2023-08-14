@@ -18,7 +18,7 @@ export default function DeleteLinkModalFooter({
       )}
       {showActionBtn && (
         <Button
-          btnClass="bg-red-600 text-white w-24 px-2 py-1"
+          btnClass="!w-24 bg-red-600 p-2 gap-1 text-white font-semibold text-md"
           title="Delete"
           onClick={actionClick}
         />

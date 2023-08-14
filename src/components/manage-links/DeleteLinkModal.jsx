@@ -7,8 +7,6 @@ export default function DeleteLinkModal({
   closeModal,
   openModal,
   title,
-  //   data,
-  //   onChange,
   actionClick,
 }) {
   return (

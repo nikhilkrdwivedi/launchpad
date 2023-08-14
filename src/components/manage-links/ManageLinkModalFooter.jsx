@@ -17,7 +17,7 @@ export default function ManageLinkModalFooter({
       )}
       {showActionBtn && (
         <Button
-          btnClass="bg-green-600 dark:bg-gray-200 text-gray-100 dark:text-gray-600 w-24 px-2 py-1"
+          btnClass="!w-24 bg-green-500 p-2 gap-1 text-white font-semibold text-md"
           title="Save"
           onClick={actionClick}
         />

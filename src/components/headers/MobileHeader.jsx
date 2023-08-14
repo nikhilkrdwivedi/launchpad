@@ -1,7 +1,6 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
-import { FaTwitterSquare } from "react-icons/fa";
 import ThemeSwitch from "@components/themes/ThemeSwitch";
 import { BiSolidUserDetail } from "react-icons/bi";
 import { RiMenuFoldLine, RiMenuUnfoldLine } from "react-icons/ri";
@@ -118,11 +117,11 @@ export default function MobileHeader() {
                             <div className="flex flex-col w-full">
                               <span className="flex items-center gap-1 text-gray-600 dark:text-white text-sm font-semibold px-2 truncate text-ellipsis w-5/6">
                                 {userContext?.name || "NA"}
-                                <FaTwitterSquare
+                                {/* <FaTwitterSquare
                                   width="16px"
                                   height="16px"
                                   className="text-green-600 dark:text-yellow-600"
-                                />
+                                /> */}
                               </span>
                               <span className=" text-gray-400 text-xs font-normal px-2 truncate text-ellipsis w-5/6">
                                 {userContext?.email}
@@ -134,8 +133,6 @@ export default function MobileHeader() {
                           </Dialog.Title>
                         </div>
                         <div className="relative flex-1 overflow-y-scroll bg-gray-200 dark:bg-gray-900">
-                          {/* <div className="w-full"> */}
-                          {/* <div className="mx-auto w-full max-w-md bg-white dark:bg-black"> */}
                           <div className="flex flex-col h-full justify-between">
                             <div className="overflow-auto">
                               <div

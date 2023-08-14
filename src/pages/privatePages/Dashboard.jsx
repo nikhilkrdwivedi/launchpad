@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useMemo, useState } from "react";
+import { useQuery, useMutation } from "@apollo/client";
+import { toast } from "react-toastify";
 import Container from "@components/containers/Container";
 import TopHeaderWrapper from "@components/headers/TopHeaderWrapper";
-import { useMemo } from "react";
-import { useState } from "react";
 import ManageLinkHeader from "@components/manage-links/ManageLinkHeader";
-import { useQuery, useMutation } from "@apollo/client";
 import {
   CREATE_QUICKLINK__MUTATION,
   DELETE_QUICKLINK_MUTATION,
@@ -13,7 +14,6 @@ import {
 import NoDataFound from "@components/manage-links/NoDataFound";
 import ManageLinkList from "@components/manage-links/ManageLinkList";
 import FullScreenLoader from "@components/loaders/FullScreenLoader";
-import { toast } from "react-toastify";
 import { useTheme } from "@contexts/ThemeContext";
 import Button from "@elements/Button";
 import useAuthentication from "@hooks/useAuthentication";
@@ -41,6 +41,7 @@ export default function Dashboard() {
   const [showDeleteLinkModal, setShowDeleteLinkModal] = useState(false);
   const [showShareLinkModal, setShowShareLinkModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
+  const [selectedItemsError, setSelectedItemsError] = useState({});
   const [quickLinksList, setQuickLinksList] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
 
@@ -57,7 +58,7 @@ export default function Dashboard() {
   const deleteLink = async () => {
     try {
       let id = selectedItem?.id;
-      const res = await deleteQuickLink({
+      await deleteQuickLink({
         variables: { id },
         refetchQueries: [QUICKLINKS_QUERY],
       });
@@ -74,11 +75,28 @@ export default function Dashboard() {
       });
     }
   };
+
+  const validatedRequest = () => {
+    const errors = {};
+
+    if (!selectedItem?.link) {
+      errors["link"] = "Link is required!";
+    }
+    if (!selectedItem?.quickNote) {
+      errors["quickNote"] = "Quick Note is required!";
+    }
+
+    setSelectedItemsError(errors);
+    if (!Object.keys(errors).length) {
+      saveLink();
+    }
+  };
+
   const saveLink = async () => {
     try {
       let payload = { ...selectedItem, authorId: userContext?._id };
       const call = payload.id ? updateQuickLink : createQuickLink;
-      const res = await call({
+      await call({
         variables: payload,
         refetchQueries: [QUICKLINKS_QUERY],
       });
@@ -163,9 +181,10 @@ export default function Dashboard() {
             openModal={() => setShowModal(true)}
             closeModal={() => closeModal()}
             data={selectedItem}
-            title={"Edit Quick Link"}
+            title={`${selectedItem?.id ? "Edit" : "Add"} Quick Link`}
             isOpen={showModal}
-            actionClick={() => saveLink()}
+            error={selectedItemsError}
+            actionClick={() => validatedRequest()}
             onChange={(value, key) => {
               setSelectedItem((prev) => ({ ...prev, [key]: value }));
             }}

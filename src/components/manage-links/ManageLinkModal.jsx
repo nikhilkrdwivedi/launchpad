@@ -11,6 +11,7 @@ export default function ManageLinkModal({
   data,
   onChange,
   actionClick,
+  error,
 }) {
   return (
     <div>
@@ -22,6 +23,7 @@ export default function ManageLinkModal({
         body={
           <ManageLinkModalBody
             data={data}
+            error={error}
             onChange={(value, key) => onChange(value, key)}
           />
         }
@@ -44,6 +46,7 @@ ManageLinkModal.propTypes = {
   data: PropTypes.any,
   onChange: PropTypes.func,
   actionClick: PropTypes.func,
+  error: PropTypes.any,
 };
 
 ManageLinkModal.defaultProps = {
@@ -54,4 +57,5 @@ ManageLinkModal.defaultProps = {
   data: {},
   onChange: null,
   actionClick: null,
+  error: {},
 };

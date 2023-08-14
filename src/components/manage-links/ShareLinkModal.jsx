@@ -16,13 +16,10 @@ export default function ShareLinkModal({
   openModal,
   title,
   data,
-  //   onChange,
-  //   actionClick,
 }) {
   const renderBody = () => {
     const openShareLink = (socialMedia, link) => {
       const url = SOCIAL_SHARE_URL[socialMedia](link);
-      console.log({ url });
       window.open(url, "_blank");
     };
     return (
@@ -53,13 +50,6 @@ export default function ShareLinkModal({
               title="Linkedin"
               onClick={() => openShareLink(SOCIAL_MEDIA.LINKEDIN, data.link)}
             />
-            {/* <ShareButton
-              icon={FaInstagram}
-              iconClass="text-pink-500"
-              iconSize={52}
-              title="Instagram"
-              onClick={() => openShareLink(SOCIAL_MEDIA.INSTAGRAM, data.link)}
-            /> */}
           </div>
         </div>
         <div className="flex flex-col items-center border-b-2 dark:border-gray-600 p-2 gap-2">
@@ -85,9 +75,6 @@ export default function ShareLinkModal({
             />
           </div>
         </div>
-        {/* <div className="flex items-center">
-          <Input />
-        </div> */}
       </div>
     );
   };
@@ -99,18 +86,6 @@ export default function ShareLinkModal({
       isOpen={isOpen}
       title={title}
       body={renderBody()}
-      //   body={
-      //     <ManageLinkModalBody
-      //       data={data}
-      //       onChange={(value, key) => onChange(value, key)}
-      //     />
-      //   }
-      //   footer={
-      //     <ManageLinkModalFooter
-      //       cancelClick={closeModal}
-      //       actionClick={actionClick}
-      //     />
-      //   }
     />
   );
 }

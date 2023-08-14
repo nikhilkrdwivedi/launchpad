@@ -11,8 +11,7 @@ import useAuthentication from "@hooks/useAuthentication";
 import Profile from "@pages/privatePages/Profile";
 
 export default function Router() {
-  const { userContext, isAuthenticated } = useAuthentication();
-  console.log({ isAuthenticated, userContext });
+  const { isAuthenticated } = useAuthentication();
   return (
     <Routes>
       {isAuthenticated ? (

@@ -2,18 +2,14 @@ import Card from "@elements/Card";
 import Input from "@elements/Input";
 import Button from "@elements/Button";
 import myImg from "@assets/myImg.jpg";
-// import Input from "@elements/Input";
-// import useAuthentication from "@hooks/useAuthentication";
 import { useEffect, useState } from "react";
 import { updateUser } from "@data/rest/users";
 import { toast } from "react-toastify";
 import { useTheme } from "@contexts/ThemeContext";
 import useAuthentication from "@hooks/useAuthentication";
 export default function ProfileCard() {
-  // const { userContext } = useAuthentication();
   const { isDarkMode } = useTheme();
   const { userContext } = useAuthentication();
-  // const navigate = useNavigate();
 
   const [form, setForm] = useState({
     name: userContext?.name,
@@ -25,24 +21,18 @@ export default function ProfileCard() {
   useEffect(() => {
     setForm(userContext);
   }, [userContext]);
+
   const validatedRequest = () => {
     const errors = {};
-    console.log("------------------------------------");
-    console.log({ errors });
     if (!form?.name) {
       errors["name"] = "Name is required!";
     }
-    // if (!form?.newPassword) {
-    //   errors["newPassword"] = "New Password is required!";
-    // }
-    console.log({ errors });
-    console.log("------------------------------------");
-
     setFormError(errors);
     if (!Object.keys(errors).length) {
       updateUserProfile();
     }
   };
+
   async function updateUserProfile() {
     try {
       const { _id } = userContext;
@@ -51,9 +41,7 @@ export default function ProfileCard() {
         type: "success",
         theme: isDarkMode ? "dark" : "light",
       });
-      // set({});
     } catch (error) {
-      console.log({ error });
       const errorMsg = error?.response?.data?.message || "Try again 🤠";
       toast(errorMsg, {
         type: "error",

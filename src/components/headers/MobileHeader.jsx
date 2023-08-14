@@ -28,7 +28,6 @@ export default function MobileHeader() {
       await resetIsAuthenticatedAndUserContext();
       navigate("/");
     } catch (error) {
-      console.log({ error });
       const errorMsg = error.message;
       toast(errorMsg, {
         type: "error",

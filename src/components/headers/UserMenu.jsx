@@ -22,7 +22,6 @@ export default function UserMenu() {
       await resetIsAuthenticatedAndUserContext();
       navigate("/");
     } catch (error) {
-      console.log({ error });
       const errorMsg = error.message;
       toast(errorMsg, {
         type: "error",
@@ -43,7 +42,6 @@ export default function UserMenu() {
       <div className="flex items-center w-auto justify-center">
         <Menu.Button className="flex w-full justify-between items-center gap-2 text-gray-600 dark:text-gray-200">
           <div className="h-[34px] w-[34px] rounded-full bg-gray-100 dark:bg-gray-800 flex justify-center items-center text-lg font-semibold shadow-md shadow-gray-400 dark:shadow-gray-200 ">
-            {/* {console.log("quck quck ", userContext?.name)} */}
             {user?.name?.charAt(0) || "😀"}
           </div>
           <HiMiniChevronDown

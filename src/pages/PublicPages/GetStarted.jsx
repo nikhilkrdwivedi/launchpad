@@ -49,12 +49,10 @@ export default function GetStarted() {
   };
   const handleSubmit = async () => {
     try {
-      console.log("trye to");
       const call = renderSignInForm ? signIn : register;
       const {
         data: { data },
       } = await call(form);
-      console.log({ data });
       await setLocalStorage({
         userCtx: JSON.stringify(data?.user),
         token: data?.token,
@@ -74,9 +72,7 @@ export default function GetStarted() {
        */
       window.location.reload();
     } catch (error) {
-      console.log({ error });
       const errorMsg = error?.response?.data?.message || "Try again 🤠";
-      console.log({ errorMsg });
       toast(errorMsg, {
         type: "error",
         theme: isDarkMode ? "dark" : "light",
@@ -84,9 +80,6 @@ export default function GetStarted() {
     }
   };
 
-  // if (userContext?.token) {
-  //   return <Navigate to="/" state={{ from: location }} replace />;
-  // }
   return (
     <div className="flex justify-center items-center  h-screen dark:bg-gray-900">
       <Button

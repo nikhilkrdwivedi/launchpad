@@ -21,16 +21,13 @@ export default function UpdatePasswordCard() {
   });
   const validatedRequest = () => {
     const errors = {};
-    console.log("------------------------------------");
-    console.log({ errors });
+
     if (!passwords?.password) {
       errors["password"] = "Password is required!";
     }
     if (!passwords?.newPassword) {
       errors["newPassword"] = "New Password is required!";
     }
-    console.log({ errors });
-    console.log("------------------------------------");
 
     setPasswordsError(errors);
     if (!Object.keys(errors).length) {
@@ -41,7 +38,6 @@ export default function UpdatePasswordCard() {
   async function updateUserPassword() {
     try {
       const { _id } = userContext;
-      console.log({ passwords, _id });
       await updatePassword(_id, passwords);
       toast("Password updated successfully.", {
         type: "success",
@@ -49,7 +45,6 @@ export default function UpdatePasswordCard() {
       });
       setPasswords({});
     } catch (error) {
-      console.log({ error });
       const errorMsg = error?.response?.data?.message || "Try again 🤠";
       toast(errorMsg, {
         type: "error",

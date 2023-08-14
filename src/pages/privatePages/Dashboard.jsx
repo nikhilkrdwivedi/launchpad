@@ -1,11 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
 import Container from "@components/containers/Container";
 import TopHeaderWrapper from "@components/headers/TopHeaderWrapper";
-// import Button from "@elements/Button";
 import { useMemo } from "react";
 import { useState } from "react";
-import EditLinkModal from "@components/manage-links/ManageLinkModal";
 import ManageLinkHeader from "@components/manage-links/ManageLinkHeader";
 import { useQuery, useMutation } from "@apollo/client";
 import {
@@ -27,29 +23,17 @@ import ShareLinkModal from "@components/manage-links/ShareLinkModal";
 import DeleteLinkModal from "@components/manage-links/DeleteLinkModal";
 
 export default function Dashboard() {
-  const {
-    userContext,
-    setUserContext,
-    isAuthenticated,
-    setIsAuthenticatedAndUserContext,
-  } = useAuthentication();
-  console.log({
-    userContext,
-    setUserContext,
-    isAuthenticated,
-    setIsAuthenticatedAndUserContext,
-  });
+  const { userContext } = useAuthentication();
 
   const { isDarkMode } = useTheme();
   let {
     data,
     loading: quickLinksQueryLoading,
-    error,
+    // error,
     fetchMore,
   } = useQuery(QUICKLINKS_QUERY, {
     variables: { first: 12, authorId: userContext?._id },
   });
-  console.log({ data, quickLinksQueryLoading, error });
   const [createQuickLink] = useMutation(CREATE_QUICKLINK__MUTATION);
   const [updateQuickLink] = useMutation(UPDATE_QUICKLINK__MUTATION);
   const [deleteQuickLink] = useMutation(DELETE_QUICKLINK_MUTATION);
@@ -61,7 +45,6 @@ export default function Dashboard() {
   const [pageInfo, setPageInfo] = useState({});
 
   useMemo(() => {
-    console.log("__________!_________");
     if (data) {
       const {
         quickLinkSearch: { edges: list, pageInfo },
@@ -84,7 +67,6 @@ export default function Dashboard() {
         theme: isDarkMode ? "dark" : "light",
       });
     } catch (error) {
-      console.log({ error });
       const errorMsg = error.message;
       toast(errorMsg, {
         type: "error",
@@ -96,17 +78,12 @@ export default function Dashboard() {
     try {
       let payload = { ...selectedItem, authorId: userContext?._id };
       const call = payload.id ? updateQuickLink : createQuickLink;
-      const res = await call({
-        variables: payload,
-        refetchQueries: [QUICKLINKS_QUERY],
-      });
       setShowModal(false);
       toast("Great news! Your changes have been saved. 😃", {
         type: "success",
         theme: isDarkMode ? "dark" : "light",
       });
     } catch (error) {
-      console.log({ error });
       const errorMsg = error.message;
       toast(errorMsg, {
         type: "error",
@@ -114,24 +91,26 @@ export default function Dashboard() {
       });
     }
   };
+
   const openManageLinkModal = (item) => {
     setSelectedItem(item);
-
     setShowModal(true);
   };
+
   const closeModal = () => {
     setShowModal(false);
     setShowDeleteLinkModal(false);
     setShowShareLinkModal(false);
     setSelectedItem({});
   };
+
   const takeActionOnClick = (item, action) => {
     setSelectedItem(item);
-    console.log({ item, action });
     if (action === ACTIONS.EDIT) setShowModal(true);
     if (action === ACTIONS.DELETE) setShowDeleteLinkModal(true);
     if (action === ACTIONS.SHARE) setShowShareLinkModal(true);
   };
+
   return (
     <TopHeaderWrapper>
       <Container className="flex-1 dark:bg-gray-900 px-4 md:px-20 md:py-4">
@@ -142,7 +121,6 @@ export default function Dashboard() {
             show={quickLinksQueryLoading}
             showCloseIcon={false}
           />
-          {console.log({ quickLinksList })}
           <ManageLinkList
             loading={quickLinksQueryLoading}
             data={quickLinksList}

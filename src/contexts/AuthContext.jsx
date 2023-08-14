@@ -13,13 +13,9 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
   async function validateUserToken() {
     try {
-      console.log("===========++++++++++++++++++++++===============");
-      console.log("Pankaj: ", userContext);
-
       await validateToken();
       setUserContext(JSON.parse(localStorage.getItem("userCtx")));
       setIsAuthenticated(true);
-      console.log("NIKHIL: ", userContext);
     } catch (error) {
       removeLocalStorage(["userCtx", "token"]);
       setIsAuthenticated(false);
@@ -31,16 +27,13 @@ export function AuthProvider({ children }) {
     setIsAuthenticated(false);
     removeLocalStorage(["userCtx", "token"]);
   };
-  const setIsAuthenticatedAndUserContext = ({ token, userCtx }) => {
-    console.log({ token, userCtx });
+  const setIsAuthenticatedAndUserContext = ({ userCtx }) => {
     setUserContext({ userCtx });
     setIsAuthenticated(true);
-    // window.location.reload('/')
   };
   React.useEffect(() => {
     let userCtx = localStorage.getItem("userCtx");
     const token = localStorage.getItem("token");
-    console.log("=========", token);
     if (token) {
       userCtx = JSON.parse(userCtx);
       validateUserToken(userCtx, token);

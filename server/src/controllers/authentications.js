@@ -64,7 +64,6 @@ export const login = async (request, response) => {
       },
     });
   } catch (error) {
-    console.log({ error })
     return response.status(500).json({
       success: false,
       message: httpResponseMessages.INTERNAL_SERVER_ERROR,
@@ -113,11 +112,11 @@ export const logout = async (request, response) => {
       updatePayload = { $set: { tokens: [] } };
     }
     console.log({ user: user._id })
-    await update({ _id: user?._id }, updatePayload);
+    const res = await update({ _id: user?._id }, updatePayload);
     return response.status(200).json({
       success: true,
       message: httpResponseMessages.LOGOUT_SUCCESS,
-      data: {},
+      data: res,
     });
   } catch (error) {
     console.log({ error })

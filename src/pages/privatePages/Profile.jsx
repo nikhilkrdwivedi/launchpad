@@ -1,18 +1,8 @@
-/* eslint-disable no-unused-vars */
 import Container from "@components/containers/Container";
 import TopHeaderWrapper from "@components/headers/TopHeaderWrapper";
 // import Button from "@elements/Button";
-import { useMemo } from "react";
-import { useState } from "react";
-import EditLinkModal from "@components/manage-links/ManageLinkModal";
-import { useQuery, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 
-import {
-  CREATE_QUICKLINK__MUTATION,
-  QUICKLINKS_QUERY,
-  UPDATE_QUICKLINK__MUTATION,
-} from "@data/graphql/queries/quickLinks";
 import { logout } from "@data/rest/authentication";
 import { toast } from "react-toastify";
 import { useTheme } from "@contexts/ThemeContext";
@@ -22,20 +12,10 @@ import useAuthentication from "@hooks/useAuthentication";
 import UpdatePasswordCard from "@components/profiles/UpdatePasswordCard";
 import ProfileCard from "@components/profiles/ProfileCard";
 import LogoutCard from "@components/profiles/LogoutCard";
-import { updatePassword, updateUser } from "@data/rest/users";
 
 export default function Profile() {
-  const {
-    userContext,
-    setUserContext,
-    isAuthenticated,
-    setIsAuthenticatedAndUserContext,
-    resetIsAuthenticatedAndUserContext,
-  } = useAuthentication();
+  const { resetIsAuthenticatedAndUserContext } = useAuthentication();
   const navigate = useNavigate();
-  const [user, setUser] = useState(userContext || {});
-  console.log({ userContext });
-  const [passwords, setPasswords] = useState({ newPassword: "", password: "" });
   const { isDarkMode } = useTheme();
 
   async function logoutAllDevices() {
@@ -44,7 +24,6 @@ export default function Profile() {
       await resetIsAuthenticatedAndUserContext();
       navigate("/");
     } catch (error) {
-      console.log({ error });
       const errorMsg = error.message;
       toast(errorMsg, {
         type: "error",
@@ -52,7 +31,6 @@ export default function Profile() {
       });
     }
   }
-
 
   return (
     <TopHeaderWrapper>

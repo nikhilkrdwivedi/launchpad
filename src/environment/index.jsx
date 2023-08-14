@@ -1,7 +1,5 @@
 /* eslint-disable no-undef */
 function getBackendUrl(env = "") {
-  //   const env = import.meta.env.VITE_ENV_NAME;
-  console.log({ env });
   if (env.toLowerCase().trim() === "local") {
     return "http://localhost:3020";
   }

@@ -12,9 +12,6 @@ export function ThemeProvider({ children }) {
   const [isDarkMode, setIsDarkMode] = useState(true);
   useEffect(() => {
     const body = document.body;
-    // const body = document.getElementById('root');
-
-    // console.log({ body, isDarkMode });
     if (isDarkMode) {
       body.classList.add("dark");
     } else {

@@ -78,6 +78,10 @@ export default function Dashboard() {
     try {
       let payload = { ...selectedItem, authorId: userContext?._id };
       const call = payload.id ? updateQuickLink : createQuickLink;
+      const res = await call({
+        variables: payload,
+        refetchQueries: [QUICKLINKS_QUERY],
+      });
       setShowModal(false);
       toast("Great news! Your changes have been saved. 😃", {
         type: "success",

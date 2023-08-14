@@ -32,7 +32,7 @@ export default function Footer() {
         />
         <Link
           target="blank"
-          href="https://google.com"
+          href="https://www.linkedin.com/in/nikhilkrdwivedi/"
           Icon={FaLinkedin}
           IconSize={24}
           title="My Linkedin"
@@ -40,7 +40,7 @@ export default function Footer() {
         />
         <Link
           target="blank"
-          href="https://google.com"
+          href="https://twitter.com/nikhilkrdwivedi/"
           Icon={FaTwitterSquare}
           IconSize={24}
           title="My Twitter"

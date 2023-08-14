@@ -10,6 +10,9 @@ export const create = async (payload = {}) => {
 };
 
 export const update = async (query = {}, payload = {}) => {
+  console.log(
+    { query, payload }
+  )
   try {
     const result = await UserModel.findOneAndUpdate(query, payload, {
       new: true,

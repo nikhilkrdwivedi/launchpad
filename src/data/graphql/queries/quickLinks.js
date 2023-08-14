@@ -1,4 +1,4 @@
-import { useQuery, gql, useMutation } from '@apollo/client'
+import { gql, } from '@apollo/client'
 
 export const QUICKLINKS_QUERY = gql`
   query QuickLinkCollection($first: Int, $after: String, $authorId: String) {
@@ -93,3 +93,10 @@ mutation QuickLinkUpdate ($id: ID, $link:String, $quickNote: String,$authorId: S
   }
 }
 `;
+
+export const DELETE_QUICKLINK_MUTATION = gql`
+mutation QuickLinkDelete ($id: ID) {
+  quickLinkDelete(by: {id: $id}) {
+    deletedId
+  }
+}`;

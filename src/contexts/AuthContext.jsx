@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { createContext, useState, useMemo } from "react";
+import React, { createContext, useState } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { validateToken } from "../data/rest/authentication";
-import { removeLocalStorage } from "../utils/manageLocalStorage";
+import { validateToken } from "@data/rest/authentication";
+import { removeLocalStorage } from "@utils/manageLocalStorage";
 
 const AuthContext = createContext({});
 
@@ -14,17 +14,16 @@ export function AuthProvider({ children }) {
   async function validateUserToken() {
     try {
       console.log("===========++++++++++++++++++++++===============");
-      console.log("Pankaj: ",userContext )
+      console.log("Pankaj: ", userContext);
 
       await validateToken();
-      setUserContext(JSON.parse(localStorage.getItem('userCtx')))
+      setUserContext(JSON.parse(localStorage.getItem("userCtx")));
       setIsAuthenticated(true);
-      console.log("NIKHIL: ",userContext )
-
+      console.log("NIKHIL: ", userContext);
     } catch (error) {
       removeLocalStorage(["userCtx", "token"]);
       setIsAuthenticated(false);
-      navigate("/login");
+      navigate("/");
     }
   }
   const resetIsAuthenticatedAndUserContext = () => {
@@ -33,7 +32,7 @@ export function AuthProvider({ children }) {
     removeLocalStorage(["userCtx", "token"]);
   };
   const setIsAuthenticatedAndUserContext = ({ token, userCtx }) => {
-    console.log({ token, userCtx})
+    console.log({ token, userCtx });
     setUserContext({ userCtx });
     setIsAuthenticated(true);
     // window.location.reload('/')
@@ -50,15 +49,15 @@ export function AuthProvider({ children }) {
     }
   }, []);
   const authArgs =
-  //  useMemo(
-  //   () => (
-      {
+    //  useMemo(
+    //   () => (
+    {
       userContext,
       setUserContext,
       isAuthenticated,
       setIsAuthenticatedAndUserContext,
       resetIsAuthenticatedAndUserContext,
-    }
+    };
   //   ),
   //   [userContext, isAuthenticated]
   // );

@@ -1,8 +1,4 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import { TbClipboardCopy } from "react-icons/tb";
-// import ErrorText from "./ErrorText";
 
 function TextArea({
   label,

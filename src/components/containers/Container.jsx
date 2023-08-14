@@ -3,16 +3,14 @@
 import PropTypes from "prop-types";
 
 export default function Container({ children, className }) {
-  return (
-    <div className={"w-full " + className}>{children}</div>
-  );
+  return <div className={"w-full " + className}>{children}</div>;
 }
 
 Container.defaultProps = {
   children: null,
   className: "",
 };
-Container.prototypes = {
+Container.propTypes = {
   children: PropTypes.any,
   className: PropTypes.string,
 };

@@ -25,14 +25,14 @@ export default function SignIn({
         rounded-md shadow-md dark:shadow-gray-600 shadow-gray-300 dark:bg-gray-800 bg-gray-100"
       >
         <Input
-          placeholder="enter email"
+          placeholder="Enter Email"
           label="Email*"
           value={data?.email || ""}
           error={dataErrors?.email || ""}
           onChange={(e) => onChange(e.target.value, "email")}
         />
         <Input
-          placeholder="enter password"
+          placeholder="Enter Password"
           label="Password*"
           type="password"
           value={data?.password || ""}

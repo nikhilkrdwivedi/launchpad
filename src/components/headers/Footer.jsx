@@ -1,15 +1,12 @@
-import React from "react";
 import darkLogo from "@assets/dark-logo.png";
 import lightLogo from "@assets/light-logo.png";
 import { useTheme } from "@contexts/ThemeContext";
-import Button from "@elements/Button";
-import { BsLinkedin } from "react-icons/bs";
 import { FaTwitterSquare } from "react-icons/fa";
 import { FaSquareGithub, FaLinkedin } from "react-icons/fa6";
 import Link from "@elements/Link";
 
 export default function Footer() {
-  const { isDarkMode, toggleTheme } = useTheme();
+  const { isDarkMode } = useTheme();
 
   return (
     <div className="flex justify-center items-center flex-col gap-4 p-8 border-t border-gray-200 dark:border-gray-600 ">

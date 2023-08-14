@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from "react";
-import TopHeader from "./Header";
-import Header from "./Header";
-import MobileHeader from "./MobileHeader";
+import Header from "@components/headers/Header";
+import MobileHeader from "@components/headers/MobileHeader";
 
 export default function TopHeaderWrapper({ children }) {
   return (

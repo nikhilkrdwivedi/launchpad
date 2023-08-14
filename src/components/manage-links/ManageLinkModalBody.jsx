@@ -2,7 +2,7 @@
 import Input from "@elements/Input";
 import TextArea from "@elements/TextArea";
 // import React from "react";
-
+import PropTypes from "prop-types";
 export default function ManageLinkModalBody({ data, onChange }) {
   // {console.log({data})}
   return (
@@ -25,3 +25,13 @@ export default function ManageLinkModalBody({ data, onChange }) {
     </div>
   );
 }
+
+ManageLinkModalBody.propTypes = {
+  data: PropTypes.any,
+  onChange: PropTypes.func,
+};
+
+ManageLinkModalBody.defaultProps = {
+  data: {},
+  onChange: null,
+};

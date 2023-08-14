@@ -1,6 +1,7 @@
 import Button from "@elements/Button";
 import PropTypes from "prop-types";
-export default function ManageLinkModalFooter({
+
+export default function DeleteLinkModalFooter({
   actionClick,
   cancelClick,
   showActionBtn,
@@ -17,8 +18,8 @@ export default function ManageLinkModalFooter({
       )}
       {showActionBtn && (
         <Button
-          btnClass="bg-green-600 dark:bg-gray-200 text-gray-100 dark:text-gray-600 w-24 px-2 py-1"
-          title="Save"
+          btnClass="bg-red-600 text-white w-24 px-2 py-1"
+          title="Delete"
           onClick={actionClick}
         />
       )}
@@ -26,14 +27,14 @@ export default function ManageLinkModalFooter({
   );
 }
 
-ManageLinkModalFooter.propTypes = {
+DeleteLinkModalFooter.propTypes = {
   actionClick: PropTypes.func,
   cancelClick: PropTypes.func,
   showActionBtn: PropTypes.string,
   showCancelBtn: PropTypes.string,
 };
 
-ManageLinkModalFooter.defaultProps = {
+DeleteLinkModalFooter.defaultProps = {
   actionClick: null,
   cancelClick: null,
   showActionBtn: true,

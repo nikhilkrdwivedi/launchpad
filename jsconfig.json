@@ -6,7 +6,13 @@
       "@pages/*": ["src/pages/*"],
       "@components/*": ["src/components/*"],
       "@contexts/*": ["src/contexts/*"],
-      "@elements/*": ["src/elements/*"]
+      "@elements/*": ["src/elements/*"],
+      "@constants/*": ["src/constants/*"],
+      "@data/*": ["src/data/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@environment/*": ["src/environment/*"],
+      "@utils/*": ["src/utils/*"],
+      "@routes/*": ["src/routes/*"]
       // Add more aliases here if needed
     }
   },

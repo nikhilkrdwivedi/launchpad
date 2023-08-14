@@ -1,8 +1,7 @@
 // import { useEffect } from "react";
 import "./App.css";
 
-import Router from "./routes/Router";
-// import { validateToken } from "./data/rest/authentication";
+import Router from "@routes/Router";
 
 function App() {
   // useEffect(() => {

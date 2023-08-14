@@ -1,9 +1,6 @@
-// import React from "react";
-
 /* eslint-disable react/prop-types */
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import PropTypes from "prop-types";
-// import Header from "../Navigation/Header";
 import AccessDenied from "@pages/commonPages/AccessDenied";
 
 function RequiredAuthentication({ isRoleRequired, roleName }) {
@@ -28,7 +25,7 @@ RequiredAuthentication.defaultProps = {
   isRoleRequired: false,
   roleName: "",
 };
-RequiredAuthentication.prototypes = {
+RequiredAuthentication.propTypes = {
   isRoleRequired: PropTypes.bool,
   roleName: PropTypes.string,
 };

@@ -1,11 +1,11 @@
-import axiosHelper from '../axiosHelper';
-import ENV from '../../environment';
+import axiosHelper from '@data/axiosHelper';
+import ENV from '@environment';
 
-const USER_ENDPOINT = '/api/v1/authentications';
+const AUTHENTICATION_ENDPOINT = '/api/v1/authentications';
 
 export function validateToken() {
     return axiosHelper(
-        `${ENV.BASE_URL + USER_ENDPOINT}/validate-token`,
+        `${ENV.BASE_URL + AUTHENTICATION_ENDPOINT}/validate-token`,
         'GET',
         null,
         null,
@@ -13,7 +13,7 @@ export function validateToken() {
 }
 export function signIn(payload) {
     return axiosHelper(
-        `${ENV.BASE_URL + USER_ENDPOINT}/login`,
+        `${ENV.BASE_URL + AUTHENTICATION_ENDPOINT}/login`,
         'POST',
         null,
         payload,
@@ -21,7 +21,7 @@ export function signIn(payload) {
 }
 export function register(payload) {
     return axiosHelper(
-        `${ENV.BASE_URL + USER_ENDPOINT}/register`,
+        `${ENV.BASE_URL + AUTHENTICATION_ENDPOINT}/register`,
         'POST',
         null,
         payload,
@@ -29,7 +29,7 @@ export function register(payload) {
 }
 export function logout(body = {}) {
     return axiosHelper(
-        `${ENV.BASE_URL + USER_ENDPOINT}/logout`,
+        `${ENV.BASE_URL + AUTHENTICATION_ENDPOINT}/logout`,
         'POST',
         null,
         body,

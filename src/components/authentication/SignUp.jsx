@@ -26,21 +26,21 @@ export default function SignUp({
         rounded-md shadow-md dark:shadow-gray-600 shadow-gray-300 dark:bg-gray-800 bg-gray-100"
       >
         <Input
-          placeholder="enter full name"
+          placeholder="Enter Full Name"
           label="Full Name*"
           value={data?.name || ""}
           error={dataErrors?.name || ""}
           onChange={(e) => onChange(e.target.value, "name")}
         />
         <Input
-          placeholder="enter email"
+          placeholder="Enter Email"
           label="Email*"
           value={data?.email || ""}
           error={dataErrors?.email || ""}
           onChange={(e) => onChange(e.target.value, "email")}
         />
         <Input
-          placeholder="enter password"
+          placeholder="Enter Password"
           label="Password*"
           type="password"
           value={data?.password || ""}
@@ -48,14 +48,10 @@ export default function SignUp({
           onChange={(e) => onChange(e.target.value, "password")}
         />
         <Button
-          // btnClass="bg-green-900"
           title={"Register"}
-          btnClass="!w-full bg-green-500 p-2 text-white font-semibold text-md"
+          btnClass="!w-full bg-green-500 p-2 !my-2 text-white font-semibold text-md"
           onClick={submitForm}
         />
-        <div className="text-gray-600 dark:text-gray-200 text-sm font-semibold text-center p-2">
-          Recover Password
-        </div>
       </div>
       <div
         className="text-gray-600 dark:text-gray-200 text-md font-semibold underline m-2 cursor-pointer"

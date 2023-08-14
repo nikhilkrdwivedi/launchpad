@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import Container from "@components/containers/Container";
 import TopHeaderWrapper from "@components/headers/TopHeaderWrapper";
@@ -9,30 +10,21 @@ import ManageLinkHeader from "@components/manage-links/ManageLinkHeader";
 import { useQuery, useMutation } from "@apollo/client";
 import {
   CREATE_QUICKLINK__MUTATION,
+  DELETE_QUICKLINK_MUTATION,
   QUICKLINKS_QUERY,
   UPDATE_QUICKLINK__MUTATION,
-} from "../../data/graphql/queries/quickLinks";
+} from "@data/graphql/queries/quickLinks";
 import NoDataFound from "@components/manage-links/NoDataFound";
 import ManageLinkList from "@components/manage-links/ManageLinkList";
 import FullScreenLoader from "@components/loaders/FullScreenLoader";
 import { toast } from "react-toastify";
-// import { showToastSuccess,  } from "../../helpers/toast";
 import { useTheme } from "@contexts/ThemeContext";
 import Button from "@elements/Button";
-import useAuthentication from "../../hooks/useAuthentication";
-// import 'react-toastify/dist/ReactToastify.css';
-// export const TODOLIST_QUERY = gql`
-//   query @live {
-//     userCollection(first: 10) {
-//       edges {
-//         node {
-//           name
-//           email
-//         }
-//       }
-//     }
-//   }
-// `
+import useAuthentication from "@hooks/useAuthentication";
+import { ACTIONS } from "@constants/actions";
+import ManageLinkModal from "@components/manage-links/ManageLinkModal";
+import ShareLinkModal from "@components/manage-links/ShareLinkModal";
+import DeleteLinkModal from "@components/manage-links/DeleteLinkModal";
 
 export default function Dashboard() {
   const {
@@ -41,28 +33,29 @@ export default function Dashboard() {
     isAuthenticated,
     setIsAuthenticatedAndUserContext,
   } = useAuthentication();
-  console.log({userContext,
+  console.log({
+    userContext,
     setUserContext,
     isAuthenticated,
-    setIsAuthenticatedAndUserContext,})
-  // {userCollection: { edges: { node } }}
-  // :{quickLinkCollection:{edges:quickLinksList}}
+    setIsAuthenticatedAndUserContext,
+  });
+
   const { isDarkMode } = useTheme();
   let {
     data,
     loading: quickLinksQueryLoading,
     error,
     fetchMore,
-  } = useQuery(QUICKLINKS_QUERY,
-    {
-      variables: { first: 1, authorId: userContext?._id },
-    }
-  );
+  } = useQuery(QUICKLINKS_QUERY, {
+    variables: { first: 12, authorId: userContext?._id },
+  });
   console.log({ data, quickLinksQueryLoading, error });
-  const [createList] = useMutation(CREATE_QUICKLINK__MUTATION);
-  const [updateList] = useMutation(UPDATE_QUICKLINK__MUTATION);
+  const [createQuickLink] = useMutation(CREATE_QUICKLINK__MUTATION);
+  const [updateQuickLink] = useMutation(UPDATE_QUICKLINK__MUTATION);
+  const [deleteQuickLink] = useMutation(DELETE_QUICKLINK_MUTATION);
   const [showModal, setShowModal] = useState(false);
-  const [showLoader, setShowLoader] = useState(false);
+  const [showDeleteLinkModal, setShowDeleteLinkModal] = useState(false);
+  const [showShareLinkModal, setShowShareLinkModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
   const [quickLinksList, setQuickLinksList] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
@@ -78,10 +71,31 @@ export default function Dashboard() {
     }
   }, [quickLinksQueryLoading, data]);
 
+  const deleteLink = async () => {
+    try {
+      let id = selectedItem?.id;
+      const res = await deleteQuickLink({
+        variables: { id },
+        refetchQueries: [QUICKLINKS_QUERY],
+      });
+      setShowDeleteLinkModal(false);
+      toast("Great news! Link successfully deleted. 😃", {
+        type: "success",
+        theme: isDarkMode ? "dark" : "light",
+      });
+    } catch (error) {
+      console.log({ error });
+      const errorMsg = error.message;
+      toast(errorMsg, {
+        type: "error",
+        theme: isDarkMode ? "dark" : "light",
+      });
+    }
+  };
   const saveLink = async () => {
     try {
-      let payload = {...selectedItem, authorId: userContext?._id };
-      const call = payload.id ? updateList : createList;
+      let payload = { ...selectedItem, authorId: userContext?._id };
+      const call = payload.id ? updateQuickLink : createQuickLink;
       const res = await call({
         variables: payload,
         refetchQueries: [QUICKLINKS_QUERY],
@@ -102,11 +116,21 @@ export default function Dashboard() {
   };
   const openManageLinkModal = (item) => {
     setSelectedItem(item);
+
     setShowModal(true);
   };
-  const closeManageLinkModal = () => {
+  const closeModal = () => {
     setShowModal(false);
+    setShowDeleteLinkModal(false);
+    setShowShareLinkModal(false);
     setSelectedItem({});
+  };
+  const takeActionOnClick = (item, action) => {
+    setSelectedItem(item);
+    console.log({ item, action });
+    if (action === ACTIONS.EDIT) setShowModal(true);
+    if (action === ACTIONS.DELETE) setShowDeleteLinkModal(true);
+    if (action === ACTIONS.SHARE) setShowShareLinkModal(true);
   };
   return (
     <TopHeaderWrapper>
@@ -118,11 +142,11 @@ export default function Dashboard() {
             show={quickLinksQueryLoading}
             showCloseIcon={false}
           />
-          {console.log({quickLinksList})}
+          {console.log({ quickLinksList })}
           <ManageLinkList
             loading={quickLinksQueryLoading}
             data={quickLinksList}
-            onClick={(item) => openManageLinkModal(item)}
+            onClick={(item, action) => takeActionOnClick(item, action)}
           />
           {pageInfo.hasNextPage && (
             <div className="flex items-center justify-center m-2 p-8 rounded-full">
@@ -136,7 +160,7 @@ export default function Dashboard() {
                       if (!fetchMoreResult) return prevResult;
                       return {
                         quickLinkSearch: {
-                          __typename: 'quickLinkSearch',
+                          __typename: "quickLinkSearch",
                           edges: [
                             ...fetchMoreResult.quickLinkSearch.edges,
                             ...prevResult.quickLinkSearch.edges,
@@ -151,16 +175,36 @@ export default function Dashboard() {
                 Load More
               </Button>
             </div>
-
           )}
           <NoDataFound loading={quickLinksQueryLoading} data={quickLinksList} />
-          <EditLinkModal
+          <ManageLinkModal
             openModal={() => setShowModal(true)}
-            closeModal={() => closeManageLinkModal()}
+            closeModal={() => closeModal()}
             data={selectedItem}
             title={"Edit Quick Link"}
             isOpen={showModal}
             actionClick={() => saveLink()}
+            onChange={(value, key) => {
+              setSelectedItem((prev) => ({ ...prev, [key]: value }));
+            }}
+          />
+          <ShareLinkModal
+            openModal={() => setShowShareLinkModal(true)}
+            closeModal={() => closeModal()}
+            data={selectedItem}
+            title={"Share Quick Link"}
+            isOpen={showShareLinkModal}
+            onChange={(value, key) => {
+              setSelectedItem((prev) => ({ ...prev, [key]: value }));
+            }}
+          />
+          <DeleteLinkModal
+            openModal={() => setShowDeleteLinkModal(true)}
+            closeModal={() => closeModal()}
+            data={selectedItem}
+            title={"Delete Link"}
+            isOpen={showDeleteLinkModal}
+            actionClick={() => deleteLink()}
             onChange={(value, key) => {
               setSelectedItem((prev) => ({ ...prev, [key]: value }));
             }}

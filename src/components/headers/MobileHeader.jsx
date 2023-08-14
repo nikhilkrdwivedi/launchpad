@@ -1,14 +1,5 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-// import CrossIcon from "../../ui/v1/icons/CrossIcon";
-// import HamburgerIcon from "../../ui/v1/icons/HamburgerIcon";
-// import UserIcon from "../../ui/v1/icons/UserIcon";
-// import ChevronDownIcon from "../../ui/v1/icons/ChevronDownIcon";
-// import ThemeContoller from "../themes/ThemeContoller";
-// import UserTeamIcon from "../../ui/v1/icons/UserTeamIcon";
-// import UserPlusIcon from "../../ui/v1/icons/UserPlusIcon";
-// import UserGroupIcon from "../../ui/v1/icons/UserGroupIcon";
-// import AcademicCapIcon from "../../ui/v1/icons/AcademicCapIcon";
 import { useTranslation } from "react-i18next";
 import { FaTwitterSquare } from "react-icons/fa";
 import ThemeSwitch from "@components/themes/ThemeSwitch";
@@ -17,16 +8,15 @@ import { RiMenuFoldLine, RiMenuUnfoldLine } from "react-icons/ri";
 import darkLogo from "@assets/dark-logo.png";
 import lightLogo from "@assets/light-logo.png";
 import { useTheme } from "@contexts/ThemeContext";
-// import ThemeSwitch from "@components/themes/ThemeSwitch";
-// import { Disclosure } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
-import useAuthentication from "../../hooks/useAuthentication";
+import useAuthentication from "@hooks/useAuthentication";
 import { toast } from "react-toastify";
-import { logout } from "../../data/rest/authentication";
+import { logout } from "@data/rest/authentication";
 
 export default function MobileHeader() {
   const navigate = useNavigate();
-  const { resetIsAuthenticatedAndUserContext, userContext } = useAuthentication();
+  const { resetIsAuthenticatedAndUserContext, userContext } =
+    useAuthentication();
   const { isDarkMode } = useTheme();
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
@@ -116,13 +106,13 @@ export default function MobileHeader() {
                         <Dialog.Title className="flex items-center p-3">
                           <div>
                             <div className="h-[34px] w-[34px] rounded-full bg-gray-100 dark:bg-gray-800 flex justify-center items-center text-lg font-semibold shadow-md shadow-gray-400 dark:shadow-gray-200 text-gray-600 dark:text-gray-200 ">
-                            {userContext?.name?.charAt(0) || '😀'}
+                              {userContext?.name?.charAt(0) || "😀"}
                             </div>
                           </div>
 
                           <div className="flex flex-col w-full">
                             <span className="flex items-center gap-1 text-gray-600 dark:text-white text-sm font-semibold px-2 truncate text-ellipsis w-5/6">
-                              {userContext?.name || 'NA'}
+                              {userContext?.name || "NA"}
                               <FaTwitterSquare
                                 width="16px"
                                 height="16px"
@@ -130,8 +120,7 @@ export default function MobileHeader() {
                               />
                             </span>
                             <span className=" text-gray-400 text-xs font-normal px-2 truncate text-ellipsis w-5/6">
-                            {userContext?.email}
-                             
+                              {userContext?.email}
                             </span>
                           </div>
                           <div>
@@ -144,7 +133,10 @@ export default function MobileHeader() {
                         {/* <div className="mx-auto w-full max-w-md bg-white dark:bg-black"> */}
                         <div className="flex flex-col h-full justify-between">
                           <div className="overflow-auto">
-                            <div  onClick={()=>navigate("/profile")} className="flex items-center gap-2 px-4 py-2 text-gray-600 dark:text-gray-200 bg-gray-50 dark:bg-gray-800 border-b-2 border-gray-300 dark:border-gray-600  cursor-pointer">
+                            <div
+                              onClick={() => navigate("/profile")}
+                              className="flex items-center gap-2 px-4 py-2 text-gray-600 dark:text-gray-200 bg-gray-50 dark:bg-gray-800 border-b-2 border-gray-300 dark:border-gray-600  cursor-pointer"
+                            >
                               <div>
                                 <BiSolidUserDetail size={24} />
                               </div>

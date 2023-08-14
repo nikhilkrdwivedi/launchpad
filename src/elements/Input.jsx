@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { TbClipboardCopy } from "react-icons/tb";
-import ErrorText from "./ErrorText";
+import ErrorText from "@elements/ErrorText";
 // import ErrorText from "./ErrorText";
 
 function Input({

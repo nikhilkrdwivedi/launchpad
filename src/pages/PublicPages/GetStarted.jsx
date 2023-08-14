@@ -1,38 +1,27 @@
-// import React from "react";
-// import darkLogo from "@assets/dark-logo.png";
 import Container from "@components/containers/Container";
-// import TopHeader from "@components/headers/Header";
-// import Input from "@elements/Input";
-// import Button from "@elements/Button";
 import SignIn from "@components/authentication/SignIn";
 import { useState } from "react";
 import SignUp from "@components/authentication/SignUp";
 import ThemeSwitch from "@components/themes/ThemeSwitch";
-import { register, signIn } from "../../data/rest/authentication";
+import { register, signIn } from "@data/rest/authentication";
 import { useTheme } from "@contexts/ThemeContext";
 import { toast } from "react-toastify";
-import useAuthentication from "../../hooks/useAuthentication";
-import { setLocalStorage } from "../../utils/manageLocalStorage";
-import { useNavigate, } from "react-router-dom";
+import useAuthentication from "@hooks/useAuthentication";
+import { setLocalStorage } from "@utils/manageLocalStorage";
+import { useNavigate } from "react-router-dom";
 import Button from "@elements/Button";
-import {IoReturnUpBackOutline} from 'react-icons/io5'
+import { IoReturnUpBackOutline } from "react-icons/io5";
+
 export default function GetStarted() {
   const { isDarkMode } = useTheme();
-  // const history = useHistory();
-
-  const {
-    userContext,
-    setUserContext,
-    isAuthenticated,
-    setIsAuthenticatedAndUserContext,
-  } = useAuthentication();
-  console.log("===>", { userContext, setUserContext, isAuthenticated });
+  const { setUserContext, setIsAuthenticatedAndUserContext } =
+    useAuthentication();
   const navigate = useNavigate();
   const [renderSignInForm, setRenderSignInForm] = useState(true);
-  const [refresh, setRefresh] = useState(true);
   const [form, setForm] = useState({
-    email: 'pankaj.dwivedi@gmail.com',//"authornikhildwivedi@gmail.com",
-    password: "Pankaj123.@",
+    // 'pankaj.dwivedi@gmail.com',
+    email: "authornikhildwivedi@gmail.com",
+    password: "Nikhil123.@", //"Pankaj123.@",
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -44,8 +33,6 @@ export default function GetStarted() {
   };
   const validatedRequest = () => {
     const errors = {};
-    console.log("------------------------------------");
-    console.log({ errors });
     if (!renderSignInForm && !form?.name) {
       errors["name"] = "Name is required field!";
     }
@@ -55,9 +42,6 @@ export default function GetStarted() {
     if (!form?.password) {
       errors["password"] = "Password is required field!";
     }
-    console.log({ errors });
-    console.log("------------------------------------");
-
     setFormErrors(errors);
     if (!Object.keys(errors).length) {
       handleSubmit();
@@ -75,11 +59,6 @@ export default function GetStarted() {
         userCtx: JSON.stringify(data?.user),
         token: data?.token,
       });
-      // toast(data?.successMsg, {
-      //   theme: "colored",
-      //   type: "success",
-      //   position: "top-right",
-      // });
       setIsAuthenticatedAndUserContext({
         userCtx: data?.user,
         token: data?.token,
@@ -89,13 +68,14 @@ export default function GetStarted() {
         type: "success",
         theme: isDarkMode ? "dark" : "light",
       });
-      // history.push('/')
-      // window.
-      // setRefresh(!refresh)
       navigate("/");
+      /**
+       * Need to find better approach to handle this
+       */
+      window.location.reload();
     } catch (error) {
       console.log({ error });
-      const errorMsg = error.response.data.message || "Try again 🤠";
+      const errorMsg = error?.response?.data?.message || "Try again 🤠";
       console.log({ errorMsg });
       toast(errorMsg, {
         type: "error",
@@ -109,7 +89,14 @@ export default function GetStarted() {
   // }
   return (
     <div className="flex justify-center items-center  h-screen dark:bg-gray-900">
-      <Button onClick={()=> {navigate('/')}} btnClass="!fixed top-0 left-0 m-4 md:m-12 bg-gray-200 dark:bg-gray-800 h-[34px] w-[34px] text-gray-400 dark:text-gray-600  " Icon={IoReturnUpBackOutline} IconSize={28}/>
+      <Button
+        onClick={() => {
+          navigate("/");
+        }}
+        btnClass="!fixed top-0 left-0 m-4 md:m-12 bg-gray-200 dark:bg-gray-800 h-[34px] w-[34px] text-gray-400 dark:text-gray-600  "
+        Icon={IoReturnUpBackOutline}
+        IconSize={28}
+      />
       <ThemeSwitch themeSwitchClass="!fixed top-0 right-0 m-4 md:m-12" />
 
       <Container className="flex-1 dark:bg-gray-900">

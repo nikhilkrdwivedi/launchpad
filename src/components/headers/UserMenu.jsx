@@ -1,21 +1,21 @@
 import { Menu, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import { HiMiniChevronDown } from "react-icons/hi2";
-import useAuthentication from "../../hooks/useAuthentication";
+import useAuthentication from "@hooks/useAuthentication";
 import { toast } from "react-toastify";
-import { logout } from "../../data/rest/authentication";
+import { logout } from "@data/rest/authentication";
 import { useTheme } from "@contexts/ThemeContext";
-// import ThemeSwitch from "@components/themes/ThemeSwitch";
-// import { Disclosure } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
-// BiSolidUserDetail
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { BiSolidUserDetail } from "react-icons/bi";
+
 export default function UserMenu() {
-  const { resetIsAuthenticatedAndUserContext, userContext, isAuthenticated } = useAuthentication();
+  const { resetIsAuthenticatedAndUserContext, userContext, isAuthenticated } =
+    useAuthentication();
   const navigate = useNavigate();
   const { isDarkMode } = useTheme();
+  const [user, setUser] = useState(userContext);
   async function logoutUser() {
     try {
       await logout({ allDeviceLogout: false });
@@ -30,7 +30,11 @@ export default function UserMenu() {
       });
     }
   }
-  if(!isAuthenticated) return null;
+  useEffect(() => {
+    setUser(userContext);
+  }, [userContext]);
+  if (!isAuthenticated) return null;
+
   return (
     <Menu
       as="div"
@@ -39,8 +43,8 @@ export default function UserMenu() {
       <div className="flex items-center w-auto justify-center">
         <Menu.Button className="flex w-full justify-between items-center gap-2 text-gray-600 dark:text-gray-200">
           <div className="h-[34px] w-[34px] rounded-full bg-gray-100 dark:bg-gray-800 flex justify-center items-center text-lg font-semibold shadow-md shadow-gray-400 dark:shadow-gray-200 ">
-            {console.log("quck quck ",userContext?.name)}
-          {userContext?.name?.charAt(0) || '😀'}
+            {/* {console.log("quck quck ", userContext?.name)} */}
+            {user?.name?.charAt(0) || "😀"}
           </div>
           <HiMiniChevronDown
             size={24}
@@ -62,8 +66,9 @@ export default function UserMenu() {
             <Menu.Item>
               {() => (
                 <div
-                onClick={()=>navigate("/profile")}
-                 className="flex justify-start items-center gap-4 text-gray-600 dark:text-gray-200 cursor-pointer">
+                  onClick={() => navigate("/profile")}
+                  className="flex justify-start items-center gap-4 text-gray-600 dark:text-gray-200 cursor-pointer"
+                >
                   <div>
                     <BiSolidUserDetail size={24} />
                   </div>

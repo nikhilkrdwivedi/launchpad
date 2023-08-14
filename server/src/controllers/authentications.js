@@ -44,11 +44,11 @@ export const login = async (request, response) => {
     //   expiresIn: AUTH_CONSTANTS.expiresIn,
     // });
 
-    const token = jwt.sign({ userId: user._id}, secret, {
-        expiresIn: AUTH_CONSTANTS.expiresIn,
-        issuer: environment.ISSUER_URL,
-        algorithm: 'HS256'
-      });
+    const token = jwt.sign({ userId: user._id }, secret, {
+      expiresIn: AUTH_CONSTANTS.expiresIn,
+      issuer: environment.ISSUER_URL,
+      algorithm: 'HS256'
+    });
 
     let updatedUser = await update(
       { _id: user._id },
@@ -64,6 +64,7 @@ export const login = async (request, response) => {
       },
     });
   } catch (error) {
+    console.log({ error })
     return response.status(500).json({
       success: false,
       message: httpResponseMessages.INTERNAL_SERVER_ERROR,
@@ -92,6 +93,7 @@ export const logout = async (request, response) => {
         error: null,
       });
     }
+    console.log({ request: request.user })
     token = token.replace(/\"/g, "");
     const { allDeviceLogout } = request.body || false;
     const user = request.user;
@@ -110,6 +112,7 @@ export const logout = async (request, response) => {
     if (allDeviceLogout) {
       updatePayload = { $set: { tokens: [] } };
     }
+    console.log({ user: user._id })
     await update({ _id: user?._id }, updatePayload);
     return response.status(200).json({
       success: true,
@@ -117,6 +120,7 @@ export const logout = async (request, response) => {
       data: {},
     });
   } catch (error) {
+    console.log({ error })
     return response.status(500).json({
       success: false,
       message: httpResponseMessages.INTERNAL_SERVER_ERROR,
@@ -139,7 +143,7 @@ export const validateToken = async (request, response) => {
 
     token = token.replace(/\"/g, "");
 
-    const isValidToken = jwt.verify(token, secret,{
+    const isValidToken = jwt.verify(token, secret, {
       issuer: environment.ISSUER_URL,
       algorithm: 'HS256'
     });
@@ -151,7 +155,7 @@ export const validateToken = async (request, response) => {
         error: null,
       });
     }
-    console.log({isValidToken})
+    console.log({ isValidToken })
     const { userId } = isValidToken;
     let user = await fetchOne({
       _id: userId,
@@ -212,8 +216,8 @@ export const register = async (request, response) => {
     // token issue with validation
     const token = jwt.sign({ userId: user._id }, secret, {
       expiresIn: AUTH_CONSTANTS.expiresIn,
-        issuer: environment.ISSUER_URL,
-        algorithm: 'HS256'
+      issuer: environment.ISSUER_URL,
+      algorithm: 'HS256'
     });
 
     // add token to user token mapping

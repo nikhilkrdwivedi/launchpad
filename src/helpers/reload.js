@@ -1,4 +1,4 @@
-export const forceReloadPage = (time = 3000) => {
+export const forceReloadPage = (time = 1000) => {
     setTimeout(() => {
         window.location.reload()
     }, time)

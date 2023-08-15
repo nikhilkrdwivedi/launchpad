@@ -22,10 +22,15 @@ type QuickLink @model @search {
   link: String!
   quickNote: String!
   authorId: String!
+  # category: Category
 }
+
+# type Category @model @search {
+# name: String!
+# quickLinks: [QuickLink]
+# }
 
 # Start your backend
 # https://grafbase.com/docs/cli
 # npx grafbase dev
 # https://launchpad-master-nikhilkrdwivedi.grafbase.app/admin
-

@@ -5,6 +5,8 @@ import authenticationRouter from "../routes/authentications.js";
 import usersRouter from "../routes/users.js";
 // import todoRouter from "../routes/todos";
 import morgan from "morgan";
+import { sendEmail } from "../helpers/sendEmail.js";
+import { sendOtpTemplate } from "../templates/html/sendOtp.js";
 
 export function createServer() {
   const app = express();
@@ -22,6 +24,21 @@ export function createServer() {
   app.use("/api/v1/users/", usersRouter);
 
   app.get("/", (request, response) => {
+
+    const body = sendOtpTemplate('Nikhil Kumar Dwivedi', 900090)
+    const mailOptions = {
+      // from: 'developer.nikhil@outlook.com',
+      recipients: ['authornikhildwivedi@gmail.com'],
+      subject: 'Subject of the email',
+      // text: 'Plain text email body',
+      body: body,
+    };
+    sendEmail(mailOptions);
+
+
+
+
+
 
     return response.status(200).json({
       success: true,

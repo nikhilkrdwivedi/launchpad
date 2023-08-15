@@ -124,6 +124,7 @@ export default function Dashboard() {
     setShowDeleteLinkModal(false);
     setShowShareLinkModal(false);
     setSelectedItem({});
+    setSelectedItemsError({});
   };
 
   const takeActionOnClick = (item, action) => {

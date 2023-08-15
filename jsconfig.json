@@ -12,7 +12,8 @@
       "@hooks/*": ["src/hooks/*"],
       "@environment/*": ["src/environment/*"],
       "@utils/*": ["src/utils/*"],
-      "@routes/*": ["src/routes/*"]
+      "@routes/*": ["src/routes/*"],
+      "@helpers/*": ["src/helpers/*"]
       // Add more aliases here if needed
     }
   },

@@ -21,6 +21,7 @@ import { ACTIONS } from "@constants/actions";
 import ManageLinkModal from "@components/manage-links/ManageLinkModal";
 import ShareLinkModal from "@components/manage-links/ShareLinkModal";
 import DeleteLinkModal from "@components/manage-links/DeleteLinkModal";
+import { forceReloadPage } from "@helpers/reload";
 
 export default function Dashboard() {
   const { userContext } = useAuthentication();
@@ -105,6 +106,7 @@ export default function Dashboard() {
         type: "success",
         theme: isDarkMode ? "dark" : "light",
       });
+      forceReloadPage();
     } catch (error) {
       const errorMsg = error.message;
       toast(errorMsg, {

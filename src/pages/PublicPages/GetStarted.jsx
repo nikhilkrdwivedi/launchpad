@@ -11,6 +11,7 @@ import { setLocalStorage } from "@utils/manageLocalStorage";
 import { useNavigate } from "react-router-dom";
 import Button from "@elements/Button";
 import { IoReturnUpBackOutline } from "react-icons/io5";
+import { forceReloadPage } from "@helpers/reload";
 
 export default function GetStarted() {
   const { isDarkMode } = useTheme();
@@ -70,7 +71,7 @@ export default function GetStarted() {
       /**
        * Need to find better approach to handle this
        */
-      window.location.reload();
+      forceReloadPage();
     } catch (error) {
       const errorMsg = error?.response?.data?.message || "Try again 🤠";
       toast(errorMsg, {

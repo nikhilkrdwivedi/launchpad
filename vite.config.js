@@ -1,12 +1,10 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import path, { dirname } from 'node:path'
+import path from 'node:path'
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
-    // extensions: ['.js', '.jsx', '.scss', '.less'],
     alias: {
       '@assets': path.resolve(__dirname, './src/assets'),
       '@components': path.resolve(__dirname, './src/components'),
@@ -19,12 +17,7 @@ export default defineConfig({
       '@environment': path.resolve(__dirname, './src/environment'),
       '@utils': path.resolve(__dirname, './src/utils'),
       '@routes': path.resolve(__dirname, './src/routes'),
-      // '@hooks': path.resolve(__dirname, './src/hooks'),
-      // '@assets': '/src/assets',
-      // '@components': '/src/components',
-      // '@contexts': '/src/contexts',
-      // '@pages': '/src/pages'
-
+      '@helpers': path.resolve(__dirname, './src/helpers'),
     }
   },
   plugins: [react()],
